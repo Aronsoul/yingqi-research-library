@@ -1,0 +1,39 @@
+name: Website checks
+on:
+  pull_request:
+    paths:
+      - 'website/**'
+      - '.github/workflows/website-checks.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'website/**'
+      - '.github/workflows/website-checks.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: website-checks-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: website
+    env:
+      WRANGLER_SEND_METRICS: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install pnpm
+        run: npm install --global pnpm@11.25.0
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Type check
+        run: pnpm exec tsc --noEmit
+      - name: Production build
+        run: pnpm build

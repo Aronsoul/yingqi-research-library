@@ -1,0 +1,12 @@
+import {env} from 'cloudflare:workers';
+import {cookies} from 'next/headers';
+const COOKIE='research-github',enc=new TextEncoder();
+function b64(b:Uint8Array){let s='';for(const v of b)s+=String.fromCharCode(v);return btoa(s).replaceAll('+','-').replaceAll('/','_').replaceAll('=','')}
+function unb64(s:string){return Uint8Array.from(atob(s.replaceAll('-','+').replaceAll('_','/')),v=>v.charCodeAt(0))}
+async function key(){const e=env as unknown as Record<string,string>;if(!e.GITHUB_COOKIE_KEY)throw Error('安全连接配置暂不可用');return crypto.subtle.importKey('raw',await crypto.subtle.digest('SHA-256',enc.encode(e.GITHUB_COOKIE_KEY)),'AES-GCM',false,['encrypt','decrypt'])}
+export async function seal(value:unknown){const iv=crypto.getRandomValues(new Uint8Array(12));return b64(iv)+'.'+b64(new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},await key(),enc.encode(JSON.stringify(value)))))}
+export async function config(){const e=env as unknown as Record<string,string>;if(e.GITHUB_TOKEN&&e.GITHUB_REPO)return {token:e.GITHUB_TOKEN,repo:e.GITHUB_REPO};try{const c=(await cookies()).get(COOKIE)?.value;if(!c)return null;const [iv,cipher]=c.split('.');const v=JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(iv)},await key(),unb64(cipher))));if(v.exp<Date.now())return null;return {token:v.token as string,repo:v.repo as string}}catch{return null}}
+export function sameOrigin(req:Request){const o=req.headers.get('origin');return !!o&&new URL(o).host===new URL(req.url).host}
+export const cookieName=COOKIE;
+export async function api(token:string,path:string,method='GET',body?:unknown){const r=await fetch('https://api.github.com'+path,{method,cache:'no-store',headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','User-Agent':'YingqiResearch','Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'},...(body?{body:JSON.stringify(body)}:{})});if(!r.ok){const msg=r.status===401?'GitHub Token 无效或已过期':r.status===403?'GitHub 权限不足，请检查仓库 Contents 读写权限及创建仓库权限':r.status===409?'数据已被其他设备修改，请刷新后重试':r.status===404?'仓库不存在或 Token 无权访问':`GitHub 请求失败 (${r.status})`;throw Object.assign(Error(msg),{status:r.status})}return r.json() as Promise<any>}
+export async function requirePrivate(c:{repo:string,token:string}){if(!/^[\w.-]+\/[\w.-]+$/.test(c.repo))throw Error('仓库名格式应为 用户名/仓库名');const r=await api(c.token,'/repos/'+c.repo);if(!r.private)throw Error('仅允许连接私有仓库，请先将仓库设为 Private');return r}
