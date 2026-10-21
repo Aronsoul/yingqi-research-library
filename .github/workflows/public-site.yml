@@ -1,0 +1,45 @@
+name: Public website
+on:
+  push:
+    branches: [main]
+    paths: ['public-site/**', 'data/library.json', 'website/app/globals.css', '.github/workflows/public-site.yml']
+  pull_request:
+    paths: ['public-site/**', 'data/library.json', 'website/app/globals.css', '.github/workflows/public-site.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: public-site-${{ github.event_name == 'pull_request' && github.ref || 'production' }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check JavaScript
+        run: node --check public-site/app.js
+      - name: Build and validate literature data
+        run: node public-site/build.mjs
+      - uses: actions/upload-pages-artifact@v4
+        if: github.event_name != 'pull_request'
+        with:
+          path: public-dist
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
