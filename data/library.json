@@ -1,36 +1,6 @@
 {
   "papers": [
     {
-      "id": "paper-4dc3f5c9d26a6aa9",
-      "title": "Coupled ptychography and tomography algorithm improves reconstruction of experimental data",
-      "doi": "10.1364/OPTICA.6.001282",
-      "url": "https://doi.org/10.1364/OPTICA.6.001282",
-      "summary": "将叠层相位恢复与断层重建耦合，利用不同投影间的信息共同重建三维体，改善实验数据的分辨率与有效视场。",
-      "category": "三维断层",
-      "date": "2019",
-      "authors": "",
-      "status": "待读",
-      "tags": "截图导入",
-      "source": "https://doi.org/10.1364/OPTICA.6.001282",
-      "sourceFile": "Coupled ptychography and tomography algorithm improves reconstruction of experimental data",
-      "verification": "DOI 已核对"
-    },
-    {
-      "id": "paper-73f863e1f4dd81fb",
-      "title": "Multi-beam multi-slice X-ray ptychography",
-      "doi": "10.1038/s41598-025-93757-0",
-      "url": "https://doi.org/10.1038/s41598-025-93757-0",
-      "summary": "将多束照明与多切片传播模型结合，对厚样品内部不同深度的纳米结构进行成像，兼顾大视场与厚度方向信息。",
-      "category": "多层重建",
-      "date": "2025",
-      "authors": "",
-      "status": "待读",
-      "tags": "截图导入",
-      "source": "https://doi.org/10.1038/s41598-025-93757-0",
-      "sourceFile": "Multi-beam multi-slice X-ray ptychography",
-      "verification": "DOI 已核对"
-    },
-    {
       "id": "paper-2c7e4a8a775d8b80",
       "title": "3D atomic-scale metrology of strain relaxation and roughness in Gate-All-Around transistors via electron ptychography",
       "doi": "10.1038/s41467-026-69733-1",
@@ -373,21 +343,6 @@
       "tags": "截图导入",
       "source": "https://doi.org/10.1364/OL.384589",
       "sourceFile": "Multi-layered full-field phase imaging using continuous-wave terahertz ptychography",
-      "verification": "DOI 已核对"
-    },
-    {
-      "id": "paper-28148b014769fda7",
-      "title": "Multiscale characterization of the 3D network structure of metal carbides in a Ni superalloy by synchrotron X-ray microtomography and ptychography",
-      "doi": "10.1016/j.scriptamat.2020.10.032",
-      "url": "https://doi.org/10.1016/j.scriptamat.2020.10.032",
-      "summary": "结合同步辐射显微断层与叠层成像，在不同尺度下表征镍基高温合金中金属碳化物的三维网络。",
-      "category": "材料应用",
-      "date": "2021",
-      "authors": "",
-      "status": "待读",
-      "tags": "截图导入",
-      "source": "https://doi.org/10.1016/j.scriptamat.2020.10.032",
-      "sourceFile": "Multiscale characterization of the 3D network structure of metal",
       "verification": "DOI 已核对"
     },
     {
@@ -1022,5 +977,6 @@
     }
   ],
   "projects": [],
-  "relations": []
+  "relations": [],
+  "treeNodes": []
 }
