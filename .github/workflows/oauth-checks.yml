@@ -15,5 +15,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - run: node --check oauth-service/api/auth.mjs
+      - run: node --check oauth-service/worker.mjs
       - run: node --test oauth-service/worker.test.mjs

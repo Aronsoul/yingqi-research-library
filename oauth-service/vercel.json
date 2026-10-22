@@ -1,9 +1,0 @@
-{
-  "rewrites": [
-    {"source":"/login","destination":"/api/auth?route=login"},
-    {"source":"/callback","destination":"/api/auth?route=callback"},
-    {"source":"/session","destination":"/api/auth?route=session"},
-    {"source":"/library","destination":"/api/auth?route=library"},
-    {"source":"/logout","destination":"/api/auth?route=logout"}
-  ]
-}
