@@ -24,11 +24,9 @@
       "date": "2012",
       "summary": "提出三维多切片叠层成像方法，通过逐层传播建模处理样品中的多重散射，奠定了多切片三维叠层成像的基础。",
       "category": "3d-ptychography-imaging",
-      "tags": [
-        "3PIE",
-        "多切片",
-        "三维成像"
-      ]
+      "tags": "3PIE，多切片，三维成像",
+      "read": true,
+      "teamIds": []
     },
     {
       "id": "ptychographic-microscope-2014",
@@ -68,11 +66,9 @@
       "date": "2019",
       "summary": "面向近场叠层成像改进三维空间采样与搜索策略，利用三维优化提升重建效率和体成像表现。",
       "category": "3d-ptychography-imaging",
-      "tags": [
-        "近场叠层成像",
-        "三维优化",
-        "GA-3ePIE"
-      ]
+      "tags": "近场叠层成像，三维优化，GA-3ePIE",
+      "read": true,
+      "teamIds": []
     },
     {
       "id": "three-dimensional-single-shot-2020",
@@ -128,11 +124,9 @@
       "date": "2025",
       "summary": "首次将多束叠层成像与多切片重建结合，用于高分辨率 X 射线纳米结构深度成像。",
       "category": "3d-ptychography-imaging",
-      "tags": [
-        "多束叠层成像",
-        "多切片",
-        "X 射线"
-      ]
+      "tags": "多束叠层成像，多切片，X 射线",
+      "read": true,
+      "teamIds": []
     }
   ],
   "projects": [
@@ -229,5 +223,6 @@
     "ptychographic-transmission-2012"
   ],
   "resources": [],
-  "resourceCategories": []
+  "resourceCategories": [],
+  "teams": []
 }
