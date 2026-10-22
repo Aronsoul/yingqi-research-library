@@ -11,6 +11,6 @@ The user authorized a public repository and public browsing without GPT login or
 - Edit on a feature branch, run JS syntax check and public-site build, open a descriptive PR and merge after checks pass for authorized implementation work.
 - Do not commit generated public-dist/, credentials, .env, .dev.vars, cookies, node_modules or build logs. All repository history will be publicly readable.
 - Data writes use GitHub OAuth through oauth-service/ or authenticated GitHub edits. Only owner Aronsoul may write data/library.json on main; never allow anonymous writes.
-- Run `node --test oauth-service/worker.test.mjs` when changing auth. Do not enable public-site/admin-config.json until the separate auth service, OAuth credentials and same-site auth domain are deployed and verified. Never commit OAuth secrets or SESSION_KEY.
+- Run `node --test oauth-service/worker.test.mjs` when changing auth. Do not enable public-site/admin-config.json until the Cloudflare Worker, OAuth credentials, main-site HTTPS and actual Worker URL are deployed and verified. Never commit OAuth secrets or SESSION_KEY.
 - Preserve yingqicai.vip. Configure Pages successfully before switching DNS. Do not change domain records speculatively.
 - Report source/PR, checks, deployment and domain status truthfully. A committed workflow is not a verified deployment.
