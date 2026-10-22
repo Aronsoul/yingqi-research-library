@@ -1182,6 +1182,22 @@
       "fileName": "124 光学组件.zip",
       "size": 14627419,
       "mediaType": "application/x-zip-compressed"
+    },
+    {
+      "title": "图像处理基础知识",
+      "category": "21a70b62-a529-4fb4-a3ed-c941133db71d",
+      "url": "",
+      "summary": "",
+      "details": "",
+      "teamIds": [],
+      "id": "8d4cbd3e-54ec-437b-a6a3-9d4e5c493245",
+      "images": [],
+      "kind": "file",
+      "path": "data/assets/ff75a746-db49-49f9-b2e8-7080bc9ba11d",
+      "contentSha": "55bba831fdafe351362130519810a5cf94ce3960",
+      "fileName": "图像处理基础知识.pdf",
+      "size": 1078284,
+      "mediaType": "application/pdf"
     }
   ],
   "resourceCategories": [
@@ -1202,6 +1218,12 @@
       "parentId": "e5ac0ba3-7163-4091-9c50-2993519357a0",
       "teamIds": [],
       "id": "0d76d733-7780-47b4-babe-4aabdbd7993f"
+    },
+    {
+      "name": "图像处理",
+      "parentId": null,
+      "teamIds": [],
+      "id": "21a70b62-a529-4fb4-a3ed-c941133db71d"
     }
   ],
   "teams": []
