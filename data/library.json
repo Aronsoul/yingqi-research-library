@@ -1,1 +1,39 @@
-{"papers":[],"projects":[],"relations":[],"categories":[{"id":"3d-ptychography-imaging","name":"3D ptychography imaging","parentId":null},{"id":"bessel-beam-generation","name":"Bessel Beam Generation","parentId":null},{"id":"bessel-beam-metasurfaces","name":"超表面","parentId":"bessel-beam-generation"},{"id":"bessel-beam-optical-elements","name":"光学元件","parentId":"bessel-beam-generation"}]}
+{
+  "papers": [
+    {
+      "title": "Coupled ptychography and tomography algorithm improves reconstruction of experimental data",
+      "doi": "10.1364/OPTICA.6.001282",
+      "authors": "",
+      "date": "",
+      "category": "3d-ptychography-imaging",
+      "tags": "",
+      "summary": "",
+      "id": "76726db7-2820-4328-9946-8621462f0d80",
+      "url": "https://doi.org/10.1364/OPTICA.6.001282"
+    }
+  ],
+  "projects": [],
+  "relations": [],
+  "categories": [
+    {
+      "id": "3d-ptychography-imaging",
+      "name": "3D ptychography imaging",
+      "parentId": null
+    },
+    {
+      "id": "bessel-beam-generation",
+      "name": "Bessel Beam Generation",
+      "parentId": null
+    },
+    {
+      "id": "bessel-beam-metasurfaces",
+      "name": "超表面",
+      "parentId": "bessel-beam-generation"
+    },
+    {
+      "id": "bessel-beam-optical-elements",
+      "name": "光学元件",
+      "parentId": "bessel-beam-generation"
+    }
+  ]
+}
