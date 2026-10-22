@@ -1,0 +1,19 @@
+name: OAuth service checks
+on:
+  pull_request:
+    paths: ['oauth-service/**', '.github/workflows/oauth-checks.yml']
+  push:
+    branches: [main]
+    paths: ['oauth-service/**', '.github/workflows/oauth-checks.yml']
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --check oauth-service/api/auth.mjs
+      - run: node --test oauth-service/worker.test.mjs
