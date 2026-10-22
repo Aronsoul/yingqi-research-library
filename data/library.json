@@ -6,15 +6,25 @@
       "authors": "M. Kahnt et al.",
       "date": "2019",
       "category": "3d-ptychography-imaging",
-      "tags": [
-        "叠层成像",
-        "断层成像",
-        "联合重建"
-      ],
+      "tags": "叠层成像，断层成像，联合重建",
       "summary": "将叠层成像与断层成像重建耦合，在实验 X 射线数据上同时优化投影与体数据，改善空间分辨率和视场。",
       "id": "76726db7-2820-4328-9946-8621462f0d80",
       "url": "https://doi.org/10.1364/OPTICA.6.001282",
-      "type": "期刊论文"
+      "type": "期刊论文",
+      "details": "",
+      "teamIds": [],
+      "images": [
+        {
+          "kind": "file",
+          "path": "data/assets/f2e0a3a1-c8b5-4c6e-85e7-cb61adcbf0f2",
+          "contentSha": "4c05f88878996c1f972f2b27902b2895a2675602",
+          "fileName": "ddf6647b-0b54-4b51-949e-ed9b0066f7a0.png",
+          "size": 141449,
+          "mediaType": "image/png",
+          "alt": "ddf6647b-0b54-4b51-949e-ed9b0066f7a0.png"
+        }
+      ],
+      "read": false
     },
     {
       "id": "ptychographic-transmission-2012",
