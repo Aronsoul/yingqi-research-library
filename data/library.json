@@ -1032,6 +1032,22 @@
       ],
       "read": false,
       "teamIds": []
+    },
+    {
+      "title": "Phase tomography from x-ray coherent diffractive imaging projections",
+      "doi": "10.1364/OE.19.021345",
+      "authors": "",
+      "date": "2011",
+      "type": "期刊论文",
+      "category": "b6b1de93-9d44-4e76-a241-16a75dd63cad",
+      "tags": "",
+      "details": "Coherent diffractive imaging provides accurate phase projections that can be tomographically combined to yield detailed quantitative 3D reconstructions with a resolution that is not limited by imaging optics. We present robust algorithms for post-processing and alignment of these tomographic phase projections. A simple method to remove undesired constant and linear phase terms on the reconstructions is given. Also, we provide an algorithm for automatic alignment of projections that has good performance even for samples with no fiducial markers. Currently applied to phase projections, this alignment algorithm has proven to be robust and should also be useful for lens-based tomography techniques that pursue nanoscale 3D imaging. Lastly, we provide a method for tomographic reconstruction that works on phase projections that are known modulo 2π, such that the phase unwrapping step is avoided. We demonstrate the performance of these algorithms by 3D imaging of bacteria population in legume root-nodule cells.",
+      "summary": "",
+      "teamIds": [],
+      "id": "16d4c4cb-a2d9-4487-8dc9-eecdfc59ba2d",
+      "images": [],
+      "url": "https://doi.org/10.1364/OE.19.021345",
+      "read": false
     }
   ],
   "projects": [
@@ -1122,6 +1138,12 @@
       "id": "bessel-beam-optical-elements",
       "name": "光学元件",
       "parentId": "bessel-beam-generation"
+    },
+    {
+      "name": "Tomography",
+      "parentId": null,
+      "teamIds": [],
+      "id": "b6b1de93-9d44-4e76-a241-16a75dd63cad"
     }
   ],
   "treeNodes": [
