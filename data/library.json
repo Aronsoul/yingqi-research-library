@@ -1135,11 +1135,25 @@
       "summary": "在PPT中绘制光路时可使用的已有的器件图",
       "teamIds": [],
       "id": "82695fc6-07b4-49a4-b9f3-fde1b32a9a09"
+    },
+    {
+      "title": "光学器件模型(blender)",
+      "category": "c19fd09e-8cd2-4d62-b7b1-ae9647acd383",
+      "url": "",
+      "summary": "",
+      "teamIds": [],
+      "id": "14bf287b-8912-47e6-aa59-93c19edc5037",
+      "kind": "file",
+      "path": "data/assets/0fcfe883-ae22-422a-bf80-2991976777c4",
+      "contentSha": "bd5f1dcb3b2344468270c6099c8c661042e6a73a",
+      "fileName": "124 光学组件.zip",
+      "size": 14627419,
+      "mediaType": "application/x-zip-compressed"
     }
   ],
   "resourceCategories": [
     {
-      "name": "光学器件图",
+      "name": "光学器件",
       "parentId": null,
       "teamIds": [],
       "id": "c19fd09e-8cd2-4d62-b7b1-ae9647acd383"
