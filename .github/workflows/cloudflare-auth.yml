@@ -1,0 +1,49 @@
+name: Deploy GitHub auth Worker
+on:
+  push:
+    branches: [main]
+    paths: ['oauth-service/**', '.github/workflows/cloudflare-auth.yml']
+  pull_request:
+    paths: ['oauth-service/**', '.github/workflows/cloudflare-auth.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --check oauth-service/worker.mjs
+      - run: node --test oauth-service/worker.test.mjs
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - id: credentials
+        name: Check deployment credentials
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Explain skipped deployment until credentials are set
+        if: steps.credentials.outputs.enabled != 'true'
+        run: echo 'Set CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID in repository Actions secrets to enable Worker deployment.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Deploy Worker
+        if: steps.credentials.outputs.enabled == 'true'
+        run: npx --yes wrangler@4 deploy --config oauth-service/wrangler.toml
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
