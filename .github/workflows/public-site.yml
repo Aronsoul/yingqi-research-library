@@ -20,7 +20,9 @@ jobs:
         with:
           node-version: '24'
       - name: Check JavaScript
-        run: node --check public-site/app.js
+        run: |
+          node --check public-site/app.js
+          node --check public-site/admin.js
       - name: Build and validate literature data
         run: node public-site/build.mjs
       - uses: actions/upload-pages-artifact@v4
