@@ -33,7 +33,7 @@
 
 可以在网站的“资料管理”页面通过 GitHub 授权维护内容，也可以直接编辑 data/library.json。
 
-- papers：文献记录。每条需要唯一的 id 和 title，并可包含作者、年份、DOI、简介、分类和关键词。
+- papers：文献记录。每条需要唯一的 id 和 title，并可包含作者、年份、DOI、文献类型、简介、分类和关键词；网站支持按文献类型筛选。
 - relations：文献之间的有向关联。from 指向上级文献，to 指向下级文献，label 说明关系。
 - treeNodes：可选的知识图谱根节点文献 ID 列表；未设置时，关联中的文献会自动显示。
 - categories：文献分类，可用 parentId 建立层级。
