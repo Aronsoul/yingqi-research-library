@@ -88,7 +88,7 @@ const category=$('category').value,year=$('year').value.trim(),sort=$('sort').va
 let rows=isResources?(data.resources||[]):view==='projects'?data.projects:data.papers;
 if(category){const descendants=new Set(categoryRows.filter(c=>{let p=c;const seen=new Set();while(p&&!seen.has(p.id)){if(p.id===category)return true;seen.add(p.id);p=lookup(p.parentId)}return false}).map(c=>c.id));rows=rows.filter(p=>descendants.has(p.category)||p.category===category)}
 rows=rows.filter(p=>JSON.stringify(p).toLowerCase().includes(q)&&(!year||String(p.date||'').startsWith(year))&&(!isPapers||!type||p.type===type)).slice().sort((a,b)=>sort==='title'?(a.title||'').localeCompare(b.title||''):sort==='old'?(a.date||'').localeCompare(b.date||''):(b.date||'').localeCompare(a.date||''));
-$('content').innerHTML=rows.length?'<div class="cards">'+rows.map(isResources?resourceCard:paperCard).join('')+'</div>':'<div class="empty"><h3>暂无匹配内容</h3><p>可在资料管理中添加'+(isResources?'链接或文件。':'文献或成果。')+'</p>'+(isResources?'<a class="primary" href="./admin.html">打开资料管理 ↗</a>':'')+'</div>'
+$('content').innerHTML=rows.length?'<div class="'+(isResources?'resource-list':'cards')+'">'+rows.map(isResources?resourceCard:paperCard).join('')+'</div>':'<div class="empty"><h3>暂无匹配内容</h3><p>可在资料管理中添加'+(isResources?'链接或文件。':'文献或成果。')+'</p>'+(isResources?'<a class="primary" href="./admin.html">打开资料管理 ↗</a>':'')+'</div>'
 if(isResources)bindResourceRows();
 }
 document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x===b));$('query').value='';$('category').value='';$('year').value='';$('type').value='';render()});
