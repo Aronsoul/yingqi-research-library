@@ -6,3 +6,5 @@ keep_vars = true
 
 [vars]
 SITE_ORIGIN = "https://yingqicai.vip"
+SITE_ORIGINS = "https://yingqicai.vip,https://www.yingqicai.vip"
+
