@@ -13,7 +13,8 @@
       ],
       "summary": "将叠层成像与断层成像重建耦合，在实验 X 射线数据上同时优化投影与体数据，改善空间分辨率和视场。",
       "id": "76726db7-2820-4328-9946-8621462f0d80",
-      "url": "https://doi.org/10.1364/OPTICA.6.001282"
+      "url": "https://doi.org/10.1364/OPTICA.6.001282",
+      "type": "期刊论文"
     },
     {
       "id": "ptychographic-transmission-2012",
@@ -26,7 +27,8 @@
       "category": "3d-ptychography-imaging",
       "tags": "3PIE，多切片，三维成像",
       "read": true,
-      "teamIds": []
+      "teamIds": [],
+      "type": "期刊论文"
     },
     {
       "id": "ptychographic-microscope-2014",
@@ -40,7 +42,8 @@
       "tags": [
         "三维显微",
         "多切片"
-      ]
+      ],
+      "type": "期刊论文"
     },
     {
       "id": "multislice-mll-2018",
@@ -55,7 +58,8 @@
         "多切片",
         "X 射线",
         "多层劳厄透镜"
-      ]
+      ],
+      "type": "期刊论文"
     },
     {
       "id": "near-field-optimization-2019",
@@ -68,7 +72,8 @@
       "category": "3d-ptychography-imaging",
       "tags": "近场叠层成像，三维优化，GA-3ePIE",
       "read": true,
-      "teamIds": []
+      "teamIds": [],
+      "type": "期刊论文"
     },
     {
       "id": "three-dimensional-single-shot-2020",
@@ -83,7 +88,8 @@
         "3DSSP",
         "单次曝光",
         "动态成像"
-      ]
+      ],
+      "type": "期刊论文"
     },
     {
       "id": "tilted-illumination-2021",
@@ -98,7 +104,8 @@
         "3DSSP",
         "倾斜照明",
         "非傍轴传播"
-      ]
+      ],
+      "type": "期刊论文"
     },
     {
       "id": "virtual-depth-scan-2021",
@@ -113,7 +120,8 @@
         "虚拟深度扫描",
         "多切片",
         "VDSP"
-      ]
+      ],
+      "type": "期刊论文"
     },
     {
       "id": "multibeam-multislice-2025",
@@ -126,6 +134,891 @@
       "category": "3d-ptychography-imaging",
       "tags": "多束叠层成像，多切片，X 射线",
       "read": true,
+      "teamIds": [],
+      "type": "期刊论文"
+    },
+    {
+      "id": "paper-1038-s41467-026-69733-1",
+      "title": "3D atomic-scale metrology of strain relaxation and roughness in Gate-All-Around transistors via electron ptychography",
+      "doi": "10.1038/s41467-026-69733-1",
+      "url": "https://doi.org/10.1038/s41467-026-69733-1",
+      "authors": "Shake Karapetyan",
+      "date": "2026",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-a-methodology-for-robust-multislice-ptycho",
+      "title": "A Methodology for Robust Multislice Ptychography",
+      "authors": "Colin Gilgenbach",
+      "date": "2024",
+      "type": "会议摘要",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1107-s205327331701525x",
+      "title": "Multislice imaging of integrated circuits by precession X‐ray ptychography",
+      "doi": "10.1107/S205327331701525X",
+      "url": "https://doi.org/10.1107/S205327331701525X",
+      "authors": "",
+      "date": "2018",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1364-oe-22-013586",
+      "title": "Aperture-scanning Fourier ptychography for 3D refocusing and super-resolution macroscopic imaging",
+      "doi": "10.1364/OE.22.013586",
+      "url": "https://doi.org/10.1364/OE.22.013586",
+      "authors": "S. Dong, R. Horstmeyer, R. Shiradkar, K. Guo, X. Ou, Z. Bian, H. Xin, G. Zheng",
+      "date": "2014",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1038-s41586-024-08278-z",
+      "title": "Computational microscopy with coherent diffractive imaging and ptychography",
+      "doi": "10.1038/s41586-024-08278-z",
+      "url": "https://doi.org/10.1038/s41586-024-08278-z",
+      "authors": "Jianwei Miao",
+      "date": "2025",
+      "type": "综述",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1016-j-isci-2018-12-028",
+      "title": "Correlated X-Ray 3D Ptychography and Diffraction Microscopy Visualize Links between Morphology and Crystal Structure of Lithium-Rich Cathode Materials",
+      "doi": "10.1016/j.isci.2018.12.028",
+      "url": "https://doi.org/10.1016/j.isci.2018.12.028",
+      "authors": "Esther H.R. Tsai",
+      "date": "2019",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-direct-observation-of-3d-topological-spin-",
+      "title": "Direct observation of 3D topological spin textures and their interactions using soft x-ray vector ptychography",
+      "authors": "John Miao",
+      "date": "2021",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1016-j-procs-2017-05-101",
+      "title": "Distributed Automatic Differentiation for Ptychography",
+      "doi": "10.1016/j.procs.2017.05.101",
+      "url": "https://doi.org/10.1016/j.procs.2017.05.101",
+      "authors": "",
+      "date": "2017",
+      "type": "会议论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-electron-ptychography-images-hydrogen-atom",
+      "title": "Electron Ptychography Images Hydrogen Atom Superlattices and 3D Inhomogeneities in Palladium Hydride Nanoparticles",
+      "authors": "Schuyler Shi",
+      "date": "2024",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1038-s41467-017-00150-1",
+      "title": "Electron ptychographic microscopy for three-dimensional imaging",
+      "doi": "10.1038/s41467-017-00150-1",
+      "url": "https://doi.org/10.1038/s41467-017-00150-1",
+      "authors": "Si Gao",
+      "date": "2017",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1093-mam-ozae044-942",
+      "title": "Enhancing Depth Resolution of Multislice Ptychography with Data-Driven Prior and Regularization",
+      "doi": "10.1093/mam/ozae044.942",
+      "url": "https://doi.org/10.1093/mam/ozae044.942",
+      "authors": "Chia-Hao Lee",
+      "date": "2024",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-framework-for-three-dimensional-coherent-d",
+      "title": "Framework for three-dimensional coherent diffraction imaging by focused beam x-ray Bragg ptychography",
+      "authors": "S. O. Hruszkewycz, M. V. Holt, A. Tripathi, J. Maser, P. H. Fuoss",
+      "date": "2011",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1063-pt-3-4835",
+      "title": "Ptychography: A solution to the phase problem",
+      "doi": "10.1063/PT.3.4835",
+      "url": "https://doi.org/10.1063/PT.3.4835",
+      "authors": "Manuel Guizar-Sicairos",
+      "date": "2021",
+      "type": "杂志文章",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-high-resolution-three-dimensional-structur",
+      "title": "High resolution three dimensional structural microscopy by single angle Bragg ptychography",
+      "authors": "",
+      "date": "2015",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-high-resolution-3d-ptychography",
+      "title": "High-Resolution 3D Ptychography",
+      "authors": "",
+      "date": "2013",
+      "type": "学位论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-high-resolution-ptychographic-tomography-w",
+      "title": "High-Resolution Ptychographic Tomography with Extended Depth of Field",
+      "authors": "",
+      "date": "2017",
+      "type": "会议论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1103-physrevlett-112-053903",
+      "title": "High-resolution multislice X-ray ptychography of extended thick objects",
+      "doi": "10.1103/PhysRevLett.112.053903",
+      "url": "https://doi.org/10.1103/PhysRevLett.112.053903",
+      "authors": "A. Suzuki et al.",
+      "date": "2014",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1117-12-2304835",
+      "title": "High-resolution 3D imaging of integrated circuits by X-ray ptychography",
+      "doi": "10.1117/12.2304835",
+      "url": "https://doi.org/10.1117/12.2304835",
+      "authors": "Michal Odstrcil, Mirko Holler, Jorg Raabe, Manuel Guizar - Sicairos Paul Scherrer Institut,",
+      "date": "2018",
+      "type": "会议论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-improving-multislice-electron-ptychography",
+      "title": "Improving Multislice Electron Ptychography with a Generative Prior",
+      "authors": "Christian Belardi; Chia-Hao Lee; Yingheng Wang; Justin Lovelace; Kilian Weinberger; David Muller; Carla Gomes",
+      "date": "2025",
+      "type": "会议论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1364-ol-384589",
+      "title": "Multi-layered full-field phase imaging using continuous-wave terahertz ptychography",
+      "doi": "10.1364/OL.384589",
+      "url": "https://doi.org/10.1364/OL.384589",
+      "authors": "D. Wang, B. Li, L. Rong, F. Tan, J. J. Healy, J. Zhao, Y. Wang",
+      "date": "2020",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1038-s41598-018-20530-x",
+      "title": "Multi-slice ptychographic tomography",
+      "doi": "10.1038/s41598-018-20530-x",
+      "url": "https://doi.org/10.1038/s41598-018-20530-x",
+      "authors": "Peng Li",
+      "date": "2018",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1016-j-scriptamat-2020-10-032",
+      "title": "Multiscale characterization of the 3D network structure of metal carbides in a Ni superalloy by synchrotron X-ray microtomography and ptychography",
+      "doi": "10.1016/j.scriptamat.2020.10.032",
+      "url": "https://doi.org/10.1016/j.scriptamat.2020.10.032",
+      "authors": "Zhiguo Zhang",
+      "date": "2021",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1093-mam-ozae044-919",
+      "title": "Three-Dimensional Imaging of 2D Materials with Tilted Multislice Electron Ptychography",
+      "doi": "10.1093/mam/ozae044.919",
+      "url": "https://doi.org/10.1093/mam/ozae044.919",
+      "authors": "Jeffrey Huang",
+      "date": "2024",
+      "type": "会议摘要",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1017-s1431927618012552",
+      "title": "Multislice Imaging of Integrated Circuits by X-ray Ptychography",
+      "doi": "10.1017/S1431927618012552",
+      "url": "https://doi.org/10.1017/S1431927618012552",
+      "authors": "Stephen Urquhart",
+      "date": "2018",
+      "type": "会议摘要",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1364-oe-487002",
+      "title": "Near-field multi-slice ptychography: quantitative phase imaging of optically thick samples with visible light and X-rays",
+      "doi": "10.1364/OE.487002",
+      "url": "https://doi.org/10.1364/OE.487002",
+      "authors": "Hu, Z., Zhang, Y., Li, P., Batey, D. and Maiden, A.",
+      "date": "2023",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1364-oe-22-012634",
+      "title": "Optimization of overlap uniformness for ptychography",
+      "doi": "10.1364/OE.22.012634",
+      "url": "https://doi.org/10.1364/OE.22.012634",
+      "authors": "X. Huang, H. Yan, R. Harder, Y. Hwu, I. K. Robinson, Y. S. Chu",
+      "date": "2014",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1364-osac-2-002948",
+      "title": "Photon-limited ptychography of 3D objects via Bayesian reconstruction",
+      "doi": "10.1364/OSAC.2.002948",
+      "url": "https://doi.org/10.1364/OSAC.2.002948",
+      "authors": "V. Nikitin, S. Aslan, Y. Yao, T. Biçer, S. Leyffer, R. Mokso, D. Gürsoy",
+      "date": "2019",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1103-physrevb-91-214114",
+      "title": "Precession x-ray ptychography with multislice approach",
+      "doi": "10.1103/PhysRevB.91.214114",
+      "url": "https://doi.org/10.1103/PhysRevB.91.214114",
+      "authors": "Kei Shimomura, Akihiro Suzuki, Makoto Hirose, and Yukio Takahashi",
+      "date": "2015",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1038-nature09419",
+      "title": "Ptychographic X-ray computed tomography at the nanoscale",
+      "doi": "10.1038/nature09419",
+      "url": "https://doi.org/10.1038/nature09419",
+      "authors": "Martin Dierolf",
+      "date": "2010",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1364-ol-416144",
+      "title": "Ptychographic optical coherence tomography",
+      "doi": "10.1364/OL.416144",
+      "url": "https://doi.org/10.1364/OL.416144",
+      "authors": "M. Du, L. Loetgering, K. S. E. Eikema, S. Witte",
+      "date": "2021",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-quantitative-3d-imaging-of-highly-distorte",
+      "title": "Quantitative 3D imaging of highly distorted micro-crystals using Bragg ptychography",
+      "authors": "Peng Li; David Yang; Christoph Rau; Marc Allain; Felix Hofmann; Virginie Chamard",
+      "date": "2026",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1107-s2053273318017229",
+      "title": "Resolving 500 nm axial separation by multi-slice X-ray ptychography",
+      "doi": "10.1107/S2053273318017229",
+      "url": "https://doi.org/10.1107/S2053273318017229",
+      "authors": "Xiaojing Huang, a",
+      "date": "2019",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-simultaneous-3d-x-ray-ptycho-tomography-wi",
+      "title": "Simultaneous 3D X-ray Ptycho-Tomography With Gradient Descent",
+      "authors": "",
+      "date": "2024",
+      "type": "会议论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1038-s41598-017-05587-4",
+      "title": "Three-Dimensional Imaging of Biological Tissue by Cryo X-Ray Ptychography",
+      "doi": "10.1038/s41598-017-05587-4",
+      "url": "https://doi.org/10.1038/s41598-017-05587-4",
+      "authors": "S. H. Shahmoradian",
+      "date": "2017",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1103-physrevlett-121-256101",
+      "title": "Three-Dimensional Imaging of Phase Ordering in an Fe-Al Alloy by Bragg Ptychography",
+      "doi": "10.1103/physrevlett.121.256101",
+      "url": "https://doi.org/10.1103/physrevlett.121.256101",
+      "authors": "Chan Kim, Virginie Chamard, Jörg Hallmann, Thomas Roth, Wei Lu, Ulrike Boesenberg, Alexey Zozulya, Steven et al.",
+      "date": "2018",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1364-oe-26-031199",
+      "title": "Three-dimensional iterative multislice reconstruction for ptychographic X-ray computed tomography",
+      "doi": "10.1364/OE.26.031199",
+      "url": "https://doi.org/10.1364/OE.26.031199",
+      "authors": "K. Shimomura, M. Hirose, T. Higashino, Y. Takahashi",
+      "date": "2018",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1364-oe-537585",
+      "title": "Three-dimensional polarimetric ptychography",
+      "doi": "10.1364/OE.537585",
+      "url": "https://doi.org/10.1364/OE.537585",
+      "authors": "C HENGCHENG C HANG ,",
+      "date": "2024",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-towards-single-shot-coherent-imaging-via-o",
+      "title": "Towards single-shot coherent imaging via overlap-free ptychography",
+      "authors": "Oliver Hoidn; Albert Vong; Aashwin Mishra; Steven Henke; Matthew Seaberg",
+      "date": "2026",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1038-s41563-025-02206-w",
+      "title": "Unveiling ferroelectric 3D microstructures",
+      "doi": "10.1038/s41563-025-02206-w",
+      "url": "https://doi.org/10.1038/s41563-025-02206-w",
+      "authors": "Xiaoyue Gao",
+      "date": "2025",
+      "type": "新闻与观点",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-visualizing-defects-and-amorphous-material",
+      "title": "Visualizing Defects and Amorphous Materials in 3D with Mixed-State Multislice Electron Ptychography",
+      "authors": "",
+      "date": "2024",
+      "type": "会议摘要",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1103-physrevlett-126-193902",
+      "title": "X-Ray Ptychography with a Laboratory Source",
+      "doi": "10.1103/PhysRevLett.126.193902",
+      "url": "https://doi.org/10.1103/PhysRevLett.126.193902",
+      "authors": "",
+      "date": "2021",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1364-oe-23-012720",
+      "title": "X-ray nanotomography using near-field ptychography",
+      "doi": "10.1364/OE.23.012720",
+      "url": "https://doi.org/10.1364/OE.23.012720",
+      "authors": "M. Stockmar, M. Hubert, M. Dierolf, B. Enders, R. Clare, S. Allner, A. Fehringer, I. Zanette, J. Villanov et al.",
+      "date": "2015",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1063-1-5045131",
+      "title": "X-ray ptychography on low-dimensional hard-condensed matter materials",
+      "doi": "10.1063/1.5045131",
+      "url": "https://doi.org/10.1063/1.5045131",
+      "authors": "",
+      "date": "2019",
+      "type": "综述",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1364-oe-24-029089",
+      "title": "X-ray ptychography with extended depth of field",
+      "doi": "10.1364/OE.24.029089",
+      "url": "https://doi.org/10.1364/OE.24.029089",
+      "authors": "E. H. R. Tsai, I. Usov, A. Diaz, A. Menzel, M. Guizar-Sicairos",
+      "date": "2016",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1038-s41566-017-0072-5",
+      "title": "X-ray ptychography",
+      "doi": "10.1038/s41566-017-0072-5",
+      "url": "https://doi.org/10.1038/s41566-017-0072-5",
+      "authors": "Franz Pfeiffer",
+      "date": "2018",
+      "type": "综述",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1088-2040-8978-18-9-095701",
+      "title": "3D object hiding using three-dimensional ptychography",
+      "doi": "10.1088/2040-8978/18/9/095701",
+      "url": "https://doi.org/10.1088/2040-8978/18/9/095701",
+      "authors": "Jun Zhang",
+      "date": "2016",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1038-s41586-024-07615-6",
+      "title": "High-performance 4-nm-resolution X-ray tomography using burst ptychography",
+      "doi": "10.1038/s41586-024-07615-6",
+      "url": "https://doi.org/10.1038/s41586-024-07615-6",
+      "authors": "Tomas Aidukas",
+      "date": "2024",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1038-s41598-022-09430-3",
+      "title": "Scalable and accurate multi-GPU-based image reconstruction of large-scale ptychography data",
+      "doi": "10.1038/s41598-022-09430-3",
+      "url": "https://doi.org/10.1038/s41598-022-09430-3",
+      "authors": "Xiaodong Yu ",
+      "date": "2022",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1038-s41598-022-11292-8",
+      "title": "High-speed X-ray ptychographic tomography",
+      "doi": "10.1038/s41598-022-11292-8",
+      "url": "https://doi.org/10.1038/s41598-022-11292-8",
+      "authors": "Darren Batey ",
+      "date": "2022",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1038-s43246-023-00396-x",
+      "title": "Ptychographic X-ray computed tomography of porous membranes with nanoscale resolution",
+      "doi": "10.1038/s43246-023-00396-x",
+      "url": "https://doi.org/10.1038/s43246-023-00396-x",
+      "authors": "Radosław Górecki",
+      "date": "2023",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1186-s43593-022-00037-9",
+      "title": "Three-dimensional nanoscale reduced-angle ptycho-tomographic imaging with deep learning (RAPID)",
+      "doi": "10.1186/s43593-022-00037-9",
+      "url": "https://doi.org/10.1186/s43593-022-00037-9",
+      "authors": "Ziling Wu ",
+      "date": "2023",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-3d-mapping-of-defects-and-moire-corrugatio",
+      "title": "3D mapping of defects and moiré corrugations via electron ptychography atomic coordinate retrieval",
+      "authors": "Jeffrey Huang",
+      "date": "2026",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1126-science-adg3183",
+      "title": "Supplementary Materials for Three-dimensional inhomogeneity of zeolite structure and composition revealed by electron ptychography",
+      "doi": "10.1126/science.adg3183",
+      "url": "https://doi.org/10.1126/science.adg3183",
+      "authors": "H. Zhang et al.",
+      "date": "2023",
+      "type": "补充材料",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-strain-in-a-silicon-on-insulator-nanostruc",
+      "title": "Strain in a silicon-on-insulator nanostructure revealed by 3D x-ray Bragg ptychography",
+      "authors": "",
+      "date": "2015",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1038-srep26348",
+      "title": "Big Data Analytics for Scanning Transmission Electron Microscopy Ptychography",
+      "doi": "10.1038/srep26348",
+      "url": "https://doi.org/10.1038/srep26348",
+      "authors": "S. Jesse",
+      "date": "2016",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1093-mam-ozaf048-1059",
+      "title": "3D Ptychographic Inverse Imaging with Generative Diffusion Models",
+      "doi": "10.1093/mam/ozaf048.1059",
+      "url": "https://doi.org/10.1093/mam/ozaf048.1059",
+      "authors": "Chia-Hao Lee",
+      "date": "2025",
+      "type": "会议摘要",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
+      "teamIds": []
+    },
+    {
+      "id": "paper-1073-pnas-2019068118",
+      "title": "X-ray linear dichroic ptychography",
+      "doi": "10.1073/pnas.2019068118",
+      "url": "https://doi.org/10.1073/pnas.2019068118",
+      "authors": "Y. H. Lo et al.",
+      "date": "2021",
+      "type": "期刊论文",
+      "summary": "",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像"
+      ],
+      "read": false,
       "teamIds": []
     }
   ],
