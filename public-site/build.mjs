@@ -14,9 +14,9 @@ for(const p of data.papers)if(p.category&&!categoryIds.has(p.category))throw Err
 for(const r of data.relations)if(!ids.has(r.from)||!ids.has(r.to))throw Error('Relation refers to missing paper');
 for(const resource of data.resources||[])if(!resource.id||!resource.title||resource.path&&!resource.path.startsWith('data/assets/'))throw Error('Resource has invalid metadata: '+resource.id);
 const resourceCategoryIds=new Set((data.resourceCategories||[]).map(c=>c.id));
-for(const resource of data.resources||[]){if(resource.category&&!resourceCategoryIds.has(resource.category))throw Error('Resource refers to missing category: '+resource.id);if(resource.path){if(!/^data\/assets\/[0-9a-f-]{36}$/i.test(resource.path))throw Error('Resource has invalid asset path: '+resource.id);await access(path.join(root,resource.path))}}
+for(const resource of data.resources||[]){if(resource.category&&!resourceCategoryIds.has(resource.category))throw Error('Resource refers to missing category: '+resource.id);if(resource.images!==undefined&&!Array.isArray(resource.images))throw Error('Resource has invalid images: '+resource.id);for(const asset of [resource,...(resource.images||[])])if(asset.path){if(!/^data\/assets\/[0-9a-f-]{36}$/i.test(asset.path))throw Error('Resource has invalid asset path: '+resource.id);await access(path.join(root,asset.path))}}
 await rm(out,{recursive:true,force:true});await mkdir(out,{recursive:true});
-for(const file of ['index.html','app.js','admin.html','admin.js','admin.css','admin-config.json'])await copyFile(path.join(here,file),path.join(out,file));
+for(const file of ['index.html','app.js','resource.css','admin.html','admin.js','admin.css','admin-config.json'])await copyFile(path.join(here,file),path.join(out,file));
 async function copyAssets(source,target){let entries;try{entries=await readdir(source,{withFileTypes:true})}catch(error){if(error.code==='ENOENT')return;throw error}await mkdir(target,{recursive:true});for(const entry of entries){const from=path.join(source,entry.name),to=path.join(target,entry.name);if(entry.isDirectory())await copyAssets(from,to);else if(entry.isFile())await copyFile(from,to)}}
 await copyAssets(path.join(root,'data/assets'),path.join(out,'assets'));
 const css=await readFile(path.join(root,'website/app/globals.css'),'utf8');
@@ -27,7 +27,7 @@ const assetVersion=(process.env.GITHUB_SHA||Date.now().toString(36)).slice(0,12)
 for(const page of ['index.html','admin.html']){
  const file=path.join(out,page);
  let html=await readFile(file,'utf8');
- for(const asset of ['styles.css','app.js','admin.css','admin.js'])html=html.replaceAll('"./'+asset+'"','"./'+asset+'?v='+assetVersion+'"');
+ for(const asset of ['styles.css','app.js','resource.css','admin.css','admin.js'])html=html.replaceAll('"./'+asset+'"','"./'+asset+'?v='+assetVersion+'"');
  await writeFile(file,html);
 }
 console.log(`Built public-dist: ${data.papers.length} papers, ${data.relations.length} relations, ${(data.resources||[]).length} resources`);
