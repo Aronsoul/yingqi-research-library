@@ -3,8 +3,12 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const here=path.dirname(fileURLToPath(import.meta.url)),root=path.dirname(here),out=path.join(root,'public-dist');
 const data=JSON.parse(await readFile(path.join(root,'data/library.json'),'utf8'));
-for(const key of ['papers','projects','relations'])if(!Array.isArray(data[key]))throw Error('Invalid '+key);
+for(const key of ['papers','projects','relations','categories'])if(!Array.isArray(data[key]))throw Error('Invalid '+key);
 const ids=new Set();for(const p of data.papers){if(!p.id||ids.has(p.id)||!p.title)throw Error('Paper requires unique id and title');ids.add(p.id)}
+const categoryIds=new Set();for(const c of data.categories){if(!c.id||categoryIds.has(c.id)||!c.name)throw Error('Category requires a unique id and name');categoryIds.add(c.id)}
+for(const c of data.categories)if(c.parentId&&!categoryIds.has(c.parentId))throw Error('Category refers to missing parent: '+c.id);
+for(const c of data.categories){const seen=new Set([c.id]);let parent=c.parentId;while(parent){if(seen.has(parent))throw Error('Category hierarchy contains a cycle: '+c.id);seen.add(parent);parent=data.categories.find(x=>x.id===parent)?.parentId||null}}
+for(const p of data.papers)if(p.category&&!categoryIds.has(p.category))throw Error('Paper refers to missing category: '+p.id);
 for(const r of data.relations)if(!ids.has(r.from)||!ids.has(r.to))throw Error('Relation refers to missing paper');
 await rm(out,{recursive:true,force:true});await mkdir(out,{recursive:true});
 for(const file of ['index.html','app.js','admin.html','admin.js','admin.css','admin-config.json'])await copyFile(path.join(here,file),path.join(out,file));
