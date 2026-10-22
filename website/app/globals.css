@@ -14,3 +14,7 @@ aside{overflow-y:auto}.categoryhead{flex-shrink:0}.cat{flex-shrink:0}.sidebottom
 .tree-zoom button:disabled{opacity:.45;cursor:not-allowed}
 .tree-zoom-level{min-width:48px;text-align:center;color:#506b85;font-size:11px;font-variant-numeric:tabular-nums}
 @media(max-width:700px){.tree-toolbar>div{gap:8px}.tree-toolbar>div:first-child span{display:none}.tree-zoom{gap:4px}.tree-zoom button{padding:7px 8px}}
+
+.tree-stage{position:relative;margin:0 auto}
+.tree-roots{transform-origin:top left}
+.tree-scroll{overscroll-behavior:contain}
