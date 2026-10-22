@@ -82,7 +82,7 @@ $('query').placeholder=isResources?'标题、分类或简介':isTeams?'团队、
 const categoryKey=isResources?'resourceCategories':'categories',categoryRows=data[categoryKey]||[],lookup=id=>categoryRows.find(c=>c.id===id),selectedCategory=$('category').value;
 $('category').innerHTML='<option value="">全部分类</option>'+categoryRows.map(c=>'<option value="'+esc(c.id)+'">'+ '　'.repeat(depth(c,lookup))+esc(c.name)+'</option>').join('');
 $('category').value=selectedCategory;
-const types=[...new Set(data.papers.map(p=>p.type).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'zh-CN')),selectedType=$('type').value;
+const types=['综述','期刊论文','会议论文','学位论文','补充材料','预印本'],selectedType=$('type').value;
 $('type').innerHTML='<option value="">全部类型</option>'+types.map(t=>'<option value="'+esc(t)+'">'+esc(t)+'</option>').join('');
 $('type').value=selectedType;
 const q=$('query').value.trim().toLowerCase();
