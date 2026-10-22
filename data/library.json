@@ -12,7 +12,24 @@
       "url": "https://doi.org/10.1364/OPTICA.6.001282"
     }
   ],
-  "projects": [],
+  "projects": [
+    {
+      "title": "Cherry Tomato Detection for Harvesting Using Multimodal Perception and an Improved YOLOv7-tiny Neural Network        agronomy",
+      "url": "https://doi.org/10.3390/agronomy14102320",
+      "date": "2024.10.14",
+      "category": "",
+      "summary": "中科院二区，IF：3.4       共一第一",
+      "id": "35a4b8b4-a30b-47a3-92d8-c9a5ffa28b77"
+    },
+    {
+      "title": "Implicit Wafer Plane Inspection of Masks Using a Lithography Aware End-to-End Neural Network",
+      "url": "https://ieeexplore.ieee.org/document/11268454",
+      "date": "2025.11.25",
+      "category": "",
+      "summary": "中科院三区，IF：2.5      独立一作",
+      "id": "81b38e4f-90f6-40de-b34e-9dd193af6e75"
+    }
+  ],
   "relations": [],
   "categories": [
     {
