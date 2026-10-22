@@ -27,7 +27,7 @@ const assetVersion=(process.env.GITHUB_SHA||Date.now().toString(36)).slice(0,12)
 for(const page of ['index.html','admin.html']){
  const file=path.join(out,page);
  let html=await readFile(file,'utf8');
- for(const asset of ['styles.css','app.js','admin.css','admin.js'])html=html.replaceAll('"./'+asset+'"','"./'+asset+'?v='+assetVersion+'"');
+ for(const asset of ['styles.css','app.js','resource.css','admin.css','admin.js'])html=html.replaceAll('"./'+asset+'"','"./'+asset+'?v='+assetVersion+'"');
  await writeFile(file,html);
 }
 console.log(`Built public-dist: ${data.papers.length} papers, ${data.relations.length} relations, ${(data.resources||[]).length} resources`);
