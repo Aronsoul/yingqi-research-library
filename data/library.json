@@ -1,6 +1,21 @@
 {
   "papers": [
     {
+      "title": "Coupled ptychography and tomography algorithm improves reconstruction of experimental data",
+      "doi": "10.1364/OPTICA.6.001282",
+      "authors": "M. Kahnt et al.",
+      "date": "2019",
+      "category": "3d-ptychography-imaging",
+      "tags": [
+        "叠层成像",
+        "断层成像",
+        "联合重建"
+      ],
+      "summary": "将叠层成像与断层成像重建耦合，在实验 X 射线数据上同时优化投影与体数据，改善空间分辨率和视场。",
+      "id": "76726db7-2820-4328-9946-8621462f0d80",
+      "url": "https://doi.org/10.1364/OPTICA.6.001282"
+    },
+    {
       "id": "ptychographic-transmission-2012",
       "title": "Ptychographic transmission microscopy in three dimensions using a multi-slice approach",
       "doi": "10.1364/JOSAA.29.001606",
@@ -9,7 +24,11 @@
       "date": "2012",
       "summary": "提出三维多切片叠层成像方法，通过逐层传播建模处理样品中的多重散射，奠定了多切片三维叠层成像的基础。",
       "category": "3d-ptychography-imaging",
-      "tags": ["3PIE", "多切片", "三维成像"]
+      "tags": [
+        "3PIE",
+        "多切片",
+        "三维成像"
+      ]
     },
     {
       "id": "ptychographic-microscope-2014",
@@ -20,7 +39,10 @@
       "date": "2014",
       "summary": "展示基于叠层成像的三维显微成像方案，利用多切片重建从单次扫描数据恢复样品的深度结构。",
       "category": "3d-ptychography-imaging",
-      "tags": ["三维显微", "多切片"]
+      "tags": [
+        "三维显微",
+        "多切片"
+      ]
     },
     {
       "id": "multislice-mll-2018",
@@ -31,7 +53,11 @@
       "date": "2018",
       "summary": "将多切片叠层成像与大数值孔径多层劳厄透镜结合，验证了硬 X 射线三维重建的实验能力。",
       "category": "3d-ptychography-imaging",
-      "tags": ["多切片", "X 射线", "多层劳厄透镜"]
+      "tags": [
+        "多切片",
+        "X 射线",
+        "多层劳厄透镜"
+      ]
     },
     {
       "id": "near-field-optimization-2019",
@@ -42,18 +68,11 @@
       "date": "2019",
       "summary": "面向近场叠层成像改进三维空间采样与搜索策略，利用三维优化提升重建效率和体成像表现。",
       "category": "3d-ptychography-imaging",
-      "tags": ["近场叠层成像", "三维优化", "GA-3ePIE"]
-    },
-    {
-      "id": "coupled-ptychography-tomography-2019",
-      "title": "Coupled ptychography and tomography algorithm improves reconstruction of experimental data",
-      "doi": "10.1364/OPTICA.6.001282",
-      "url": "https://doi.org/10.1364/OPTICA.6.001282",
-      "authors": "M. Kahnt et al.",
-      "date": "2019",
-      "summary": "将叠层成像与断层成像重建耦合，在实验 X 射线数据上同时优化投影与体数据，改善空间分辨率和视场。",
-      "category": "3d-ptychography-imaging",
-      "tags": ["叠层成像", "断层成像", "联合重建"]
+      "tags": [
+        "近场叠层成像",
+        "三维优化",
+        "GA-3ePIE"
+      ]
     },
     {
       "id": "three-dimensional-single-shot-2020",
@@ -64,7 +83,11 @@
       "date": "2020",
       "summary": "提出三维单次曝光叠层成像（3DSSP），以单次采集数据解卷积出三维物体的多个平面，面向快速动态成像。",
       "category": "3d-ptychography-imaging",
-      "tags": ["3DSSP", "单次曝光", "动态成像"]
+      "tags": [
+        "3DSSP",
+        "单次曝光",
+        "动态成像"
+      ]
     },
     {
       "id": "tilted-illumination-2021",
@@ -75,7 +98,11 @@
       "date": "2021",
       "summary": "通过高倾角照明与非傍轴迭代计算改进单次曝光三维叠层成像的图像质量。",
       "category": "3d-ptychography-imaging",
-      "tags": ["3DSSP", "倾斜照明", "非傍轴传播"]
+      "tags": [
+        "3DSSP",
+        "倾斜照明",
+        "非傍轴传播"
+      ]
     },
     {
       "id": "virtual-depth-scan-2021",
@@ -86,7 +113,11 @@
       "date": "2021",
       "summary": "提出虚拟深度扫描多切片方法，在重建过程中沿样品厚度虚拟扫描，以突破切片数限制并改善深度分辨能力。",
       "category": "3d-ptychography-imaging",
-      "tags": ["虚拟深度扫描", "多切片", "VDSP"]
+      "tags": [
+        "虚拟深度扫描",
+        "多切片",
+        "VDSP"
+      ]
     },
     {
       "id": "multibeam-multislice-2025",
@@ -97,26 +128,105 @@
       "date": "2025",
       "summary": "首次将多束叠层成像与多切片重建结合，用于高分辨率 X 射线纳米结构深度成像。",
       "category": "3d-ptychography-imaging",
-      "tags": ["多束叠层成像", "多切片", "X 射线"]
+      "tags": [
+        "多束叠层成像",
+        "多切片",
+        "X 射线"
+      ]
     }
   ],
-  "projects": [],
-  "relations": [
-    {"id":"r-2012-2014","from":"ptychographic-transmission-2012","to":"ptychographic-microscope-2014","label":"实验发展：多切片三维显微成像"},
-    {"id":"r-2014-2018","from":"ptychographic-microscope-2014","to":"multislice-mll-2018","label":"大数值孔径多层劳厄透镜"},
-    {"id":"r-2012-2019-space","from":"ptychographic-transmission-2012","to":"near-field-optimization-2019","label":"三维空间优化与近场重建"},
-    {"id":"r-2012-2019-tomo","from":"ptychographic-transmission-2012","to":"coupled-ptychography-tomography-2019","label":"与断层成像耦合"},
-    {"id":"r-2012-2020","from":"ptychographic-transmission-2012","to":"three-dimensional-single-shot-2020","label":"发展为单次曝光三维重建"},
-    {"id":"r-2020-2021-tilt","from":"three-dimensional-single-shot-2020","to":"tilted-illumination-2021","label":"高倾角照明增强轴向能力"},
-    {"id":"r-2014-2021-vdsp","from":"ptychographic-microscope-2014","to":"virtual-depth-scan-2021","label":"虚拟深度扫描扩展成像深度"},
-    {"id":"r-2012-2025","from":"ptychographic-transmission-2012","to":"multibeam-multislice-2025","label":"多束照明与多切片联合"}
+  "projects": [
+    {
+      "title": "Cherry Tomato Detection for Harvesting Using Multimodal Perception and an Improved YOLOv7-tiny Neural Network        agronomy",
+      "url": "https://doi.org/10.3390/agronomy14102320",
+      "date": "2024.10.14",
+      "category": "",
+      "summary": "中科院二区，IF：3.4       共一第一",
+      "id": "35a4b8b4-a30b-47a3-92d8-c9a5ffa28b77"
+    },
+    {
+      "title": "Implicit Wafer Plane Inspection of Masks Using a Lithography Aware End-to-End Neural Network",
+      "url": "https://ieeexplore.ieee.org/document/11268454",
+      "date": "2025.11.25",
+      "category": "",
+      "summary": "中科院三区，IF：2.5      独立一作",
+      "id": "81b38e4f-90f6-40de-b34e-9dd193af6e75"
+    }
   ],
-  "treeNodes": ["ptychographic-transmission-2012"],
+  "relations": [
+    {
+      "id": "r-2012-2014",
+      "from": "ptychographic-transmission-2012",
+      "to": "ptychographic-microscope-2014",
+      "label": "实验发展：多切片三维显微成像"
+    },
+    {
+      "id": "r-2014-2018",
+      "from": "ptychographic-microscope-2014",
+      "to": "multislice-mll-2018",
+      "label": "大数值孔径多层劳厄透镜"
+    },
+    {
+      "id": "r-2012-2019-space",
+      "from": "ptychographic-transmission-2012",
+      "to": "near-field-optimization-2019",
+      "label": "三维空间优化与近场重建"
+    },
+    {
+      "id": "r-2012-2019-tomo",
+      "from": "ptychographic-transmission-2012",
+      "to": "76726db7-2820-4328-9946-8621462f0d80",
+      "label": "与断层成像耦合"
+    },
+    {
+      "id": "r-2012-2020",
+      "from": "ptychographic-transmission-2012",
+      "to": "three-dimensional-single-shot-2020",
+      "label": "发展为单次曝光三维重建"
+    },
+    {
+      "id": "r-2020-2021-tilt",
+      "from": "three-dimensional-single-shot-2020",
+      "to": "tilted-illumination-2021",
+      "label": "高倾角照明增强轴向能力"
+    },
+    {
+      "id": "r-2014-2021-vdsp",
+      "from": "ptychographic-microscope-2014",
+      "to": "virtual-depth-scan-2021",
+      "label": "虚拟深度扫描扩展成像深度"
+    },
+    {
+      "id": "r-2012-2025",
+      "from": "ptychographic-transmission-2012",
+      "to": "multibeam-multislice-2025",
+      "label": "多束照明与多切片联合"
+    }
+  ],
   "categories": [
-    {"id":"3d-ptychography-imaging","name":"3D ptychography imaging","parentId":null},
-    {"id":"bessel-beam-generation","name":"Bessel Beam Generation","parentId":null},
-    {"id":"bessel-beam-metasurfaces","name":"超表面","parentId":"bessel-beam-generation"},
-    {"id":"bessel-beam-optical-elements","name":"光学元件","parentId":"bessel-beam-generation"}
+    {
+      "id": "3d-ptychography-imaging",
+      "name": "3D ptychography imaging",
+      "parentId": null
+    },
+    {
+      "id": "bessel-beam-generation",
+      "name": "Bessel Beam Generation",
+      "parentId": null
+    },
+    {
+      "id": "bessel-beam-metasurfaces",
+      "name": "超表面",
+      "parentId": "bessel-beam-generation"
+    },
+    {
+      "id": "bessel-beam-optical-elements",
+      "name": "光学元件",
+      "parentId": "bessel-beam-generation"
+    }
+  ],
+  "treeNodes": [
+    "ptychographic-transmission-2012"
   ],
   "resources": [],
   "resourceCategories": []
