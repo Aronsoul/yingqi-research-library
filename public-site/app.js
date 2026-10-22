@@ -14,20 +14,53 @@ function paperCard(p){const u=paperURL(p),read=p.read===true;return `<article cl
 function resourceCard(r){const fileLink=r.path?'./assets/'+r.path.replace(/^data\/assets\//,'').split('/').map(encodeURIComponent).join('/'):'',url=safeURL(r.url),file=fileLink?`<a class="primary" href="${fileLink}" download="${esc(r.fileName||r.title||'download')}">下载文件 ↓</a>`:'',external=url?`<a class="primary" href="${url}" target="_blank" rel="noreferrer">打开链接 ↗</a>`:'',actions=file+external;return `<article class="paper resource-card"><div class="cardtop"><span class="badge">${esc(resourcePath(r.category))}</span><span>${esc(r.path?'文件':'链接')}</span></div><h3>${esc(r.title)}</h3><p class="abstract">${esc(r.summary||r.description||'暂无简介')}</p><div class="cardfoot"><span>${esc(r.fileName||r.url||'')}</span></div><div class="actions">${actions}</div></article>`}
 function teamCard(team){const papers=data.papers.filter(p=>(p.teamIds||[]).includes(team.id)||p.teamId===team.id),resources=(data.resources||[]).filter(r=>(r.teamIds||[]).includes(team.id)||r.teamId===team.id),projects=data.projects.filter(p=>(p.teamIds||[]).includes(team.id)||p.teamId===team.id);const links=[...papers.map(p=>({title:p.title,url:paperURL(p),kind:'文献'})),...resources.map(r=>({title:r.title,url:safeURL(r.url)||(r.path?'./assets/'+r.path.replace(/^data\/assets\//,'').split('/').map(encodeURIComponent).join('/'):'') ,kind:'资料'})),...projects.map(p=>({title:p.title,url:safeURL(p.url),kind:'成果'}))];return `<article class="team-card"><div class="team-head"><div><span class="team-region">${esc(team.region||'地区未填写')}</span><h3>${esc(team.name||team.groupName||'未命名课题组')}</h3><p>${esc(team.institution||'')}</p></div>${team.homepage&&safeURL(team.homepage)?`<a class="team-home" href="${safeURL(team.homepage)}" target="_blank" rel="noreferrer">实验室主页 ↗</a>`:''}</div><div class="team-meta"><span>负责人　${esc(team.leader||'未填写')}</span>${team.department?`<span>${esc(team.department)}</span>`:''}</div>${team.description?`<p class="team-description">${esc(team.description)}</p>`:''}<div class="team-content"><strong>本库收录代表内容 <span>${links.length}</span></strong>${links.length?`<ul>${links.map(x=>`<li><span>${esc(x.kind)}</span>${x.url?`<a href="${x.url}" target="_blank" rel="noreferrer">${esc(x.title)} ↗</a>`:esc(x.title)}</li>`).join('')}</ul>`:'<p>尚未关联论文、资料或成果。</p>'}</div></article>`}
 function teamsView(query=''){const teams=(data.teams||[]).filter(t=>JSON.stringify(t).toLowerCase().includes(query)||[...data.papers,...(data.resources||[]),...data.projects].some(x=>((x.teamIds||[]).includes(t.id)||x.teamId===t.id)&&JSON.stringify(x).toLowerCase().includes(query)));if(!teams.length)return `<div class="empty"><h3>${(data.teams||[]).length?'没有匹配的研究团队':'研究团队信息待添加'}</h3><p>在资料管理中添加地区、机构、课题组名称和负责人，并将论文或资料关联到团队。</p><a class="primary" href="./admin.html">打开资料管理 ↗</a></div>`;const groups=new Map();for(const t of teams){const region=t.region||'地区未填写';if(!groups.has(region))groups.set(region,[]);groups.get(region).push(t)}return [...groups].sort(([a],[b])=>a.localeCompare(b)).map(([region,items])=>`<section class="region-group"><h2>${esc(region)} <span>${items.length} 个团队</span></h2><div class="team-list">${items.map(teamCard).join('')}</div></section>`).join('')}
-function tree(){const papers=new Map(data.papers.map(p=>[p.id,p])),ids=new Set([...(data.treeNodes||[]),...data.relations.flatMap(r=>[r.from,r.to])].filter(id=>papers.has(id)));if(!ids.size)return '<div class="literature-tree"><div class="empty"><h3>研究脉络，等待逐步构建</h3><p>可在资料管理中添加文献，再通过“关联连线”构建关系。</p><a class="primary" href="./admin.html">打开资料管理 ↗</a></div></div>';const edges=data.relations.filter(r=>ids.has(r.from)&&ids.has(r.to)),incoming=new Set(edges.map(r=>r.to)),roots=[...ids].filter(id=>!incoming.has(id)),seen=new Set();function visit(id){if(seen.has(id))return;seen.add(id);edges.filter(r=>r.from===id).forEach(r=>visit(r.to))}roots.forEach(visit);for(const id of ids)if(!seen.has(id)){roots.push(id);visit(id)}function branch(id,path,edge){const p=papers.get(id),children=edges.filter(r=>r.from===id),cycle=path.has(id),next=new Set(path).add(id),u=paperURL(p);return `<li>${edge?`<div class="tree-edge">${esc(edge.label||'研究延伸')}</div>`:''}<article class="tree-paper"><span class="tree-year">${esc(p.date?.slice(0,4))}</span><h3>${esc(p.title)}</h3><p>${esc(p.summary||'暂无简介')}</p>${u?`<a href="${u}" target="_blank" rel="noreferrer">打开文献 ↗</a>`:''}</article>${!cycle&&children.length?`<ul>${children.map(r=>branch(r.to,next,r)).join('')}</ul>`:''}</li>`}return `<div class="literature-tree"><div class="tree-toolbar"><div><strong>知识图谱</strong><span>按研究关联查看文献脉络</span></div><div class="tree-zoom" aria-label="知识图谱缩放控件"><button type="button" data-tree-zoom="out" aria-label="缩小知识图谱">−</button><output class="tree-zoom-level" aria-live="polite">100%</output><button type="button" data-tree-zoom="in" aria-label="放大知识图谱">+</button><button type="button" data-tree-zoom="reset">重置</button></div></div><div class="tree-scroll"><ul class="tree-roots">${roots.map(id=>branch(id,new Set())).join('')}</ul></div></div>`}
+function tree(){const papers=new Map(data.papers.map(p=>[p.id,p])),ids=new Set([...(data.treeNodes||[]),...data.relations.flatMap(r=>[r.from,r.to])].filter(id=>papers.has(id)));if(!ids.size)return '<div class="literature-tree"><div class="empty"><h3>研究脉络，等待逐步构建</h3><p>可在资料管理中添加文献，再通过“关联连线”构建关系。</p><a class="primary" href="./admin.html">打开资料管理 ↗</a></div></div>';const edges=data.relations.filter(r=>ids.has(r.from)&&ids.has(r.to)),incoming=new Set(edges.map(r=>r.to)),roots=[...ids].filter(id=>!incoming.has(id)),seen=new Set();function visit(id){if(seen.has(id))return;seen.add(id);edges.filter(r=>r.from===id).forEach(r=>visit(r.to))}roots.forEach(visit);for(const id of ids)if(!seen.has(id)){roots.push(id);visit(id)}function branch(id,path,edge){const p=papers.get(id),children=edges.filter(r=>r.from===id),cycle=path.has(id),next=new Set(path).add(id),u=paperURL(p);return `<li>${edge?`<div class="tree-edge">${esc(edge.label||'研究延伸')}</div>`:''}<article class="tree-paper"><span class="tree-year">${esc(p.date?.slice(0,4))}</span><h3>${esc(p.title)}</h3><p>${esc(p.summary||'暂无简介')}</p>${u?`<a href="${u}" target="_blank" rel="noreferrer">打开文献 ↗</a>`:''}</article>${!cycle&&children.length?`<ul>${children.map(r=>branch(r.to,next,r)).join('')}</ul>`:''}</li>`}return `<div class="literature-tree"><div class="tree-toolbar"><div><strong>知识图谱</strong><span>指向节点滚轮缩放；Ctrl / ⌘ + 滚轮可在任意位置缩放</span></div><div class="tree-zoom" aria-label="知识图谱缩放控件"><button type="button" data-tree-zoom="out" aria-label="缩小知识图谱">−</button><output class="tree-zoom-level" aria-live="polite">100%</output><button type="button" data-tree-zoom="in" aria-label="放大知识图谱">+</button><button type="button" data-tree-zoom="reset">重置</button></div></div><div class="tree-scroll"><div class="tree-stage"><ul class="tree-roots">${roots.map(id=>branch(id,new Set())).join('')}</ul></div></div></div>`}
 function bindTreeZoom(){
+const scroll=$('content').querySelector('.tree-scroll');
+const stage=$('content').querySelector('.tree-stage');
 const canvas=$('content').querySelector('.tree-roots');
-if(!canvas)return;
 const level=$('content').querySelector('.tree-zoom-level');
 const out=$('content').querySelector('[data-tree-zoom="out"]');
 const inn=$('content').querySelector('[data-tree-zoom="in"]');
-const apply=()=>{canvas.style.zoom=String(treeZoom);level.value=Math.round(treeZoom*100)+'%';level.textContent=level.value;out.disabled=treeZoom<=.5;inn.disabled=treeZoom>=2};
-$('content').querySelectorAll('[data-tree-zoom]').forEach(button=>button.addEventListener('click',()=>{
-const action=button.dataset.treeZoom;
-if(action==='reset')treeZoom=1;
-else treeZoom=Math.max(.5,Math.min(2,Math.round((treeZoom+(action==='in'?.1:-.1))*10)/10));
-apply()
-}));
+if(!scroll||!stage||!canvas)return;
+const minZoom=.1,maxZoom=3;
+const apply=()=>{
+stage.style.width=(canvas.offsetWidth*treeZoom)+'px';
+stage.style.height=(canvas.offsetHeight*treeZoom)+'px';
+canvas.style.transformOrigin='top left';
+canvas.style.transform='scale('+treeZoom+')';
+level.textContent=Math.round(treeZoom*100)+'%';
+out.disabled=treeZoom<=minZoom;
+inn.disabled=treeZoom>=maxZoom
+};
+const zoomAt=(next,x,y)=>{
+next=Math.max(minZoom,Math.min(maxZoom,next));
+const before=canvas.getBoundingClientRect();
+const pointX=(x-before.left)/treeZoom;
+const pointY=(y-before.top)/treeZoom;
+treeZoom=next;
+apply();
+const after=canvas.getBoundingClientRect();
+scroll.scrollLeft+=after.left+pointX*treeZoom-x;
+scroll.scrollTop+=after.top+pointY*treeZoom-y
+};
+const zoomFromButton=direction=>{
+const rect=scroll.getBoundingClientRect();
+const factor=direction==='in'?1.2:1/1.2;
+zoomAt(Math.round(treeZoom*factor*100)/100,rect.left+scroll.clientWidth/2,rect.top+scroll.clientHeight/2)
+};
+out.addEventListener('click',()=>zoomFromButton('out'));
+inn.addEventListener('click',()=>zoomFromButton('in'));
+$('content').querySelector('[data-tree-zoom="reset"]').addEventListener('click',()=>{
+const rect=scroll.getBoundingClientRect();
+zoomAt(1,rect.left+scroll.clientWidth/2,rect.top+scroll.clientHeight/2)
+});
+scroll.addEventListener('wheel',event=>{
+const overNode=event.target.closest('.tree-paper,.tree-edge');
+if(!event.ctrlKey&&!event.metaKey&&!overNode)return;
+event.preventDefault();
+zoomAt(treeZoom*Math.exp(-event.deltaY*.002),event.clientX,event.clientY)
+},{passive:false});
 apply()
 }
 function populateFilters(){const categories=data.categories||[],yrs=[...new Set(data.papers.map(p=>String(p.date||'').slice(0,4)).filter(y=>/^\d{4}$/.test(y)))].sort().reverse();$('category').innerHTML='<option value="">全部分类</option>'+categories.map(c=>`<option value="${esc(c.id)}">${'　'.repeat(depth(c,categoryById))}${esc(c.name)}</option>`).join('');$('year-options').innerHTML=yrs.map(y=>`<option value="${esc(y)}"></option>`).join('')}
