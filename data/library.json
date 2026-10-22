@@ -156,7 +156,7 @@
     {
       "id": "paper-a-methodology-for-robust-multislice-ptycho",
       "title": "A Methodology for Robust Multislice Ptychography",
-      "authors": "Colin Gilgenbach",
+      "authors": "C. Gilgenbach et al.",
       "date": "2024",
       "type": "会议摘要",
       "summary": "",
@@ -243,7 +243,9 @@
         "叠层成像"
       ],
       "read": false,
-      "teamIds": []
+      "teamIds": [],
+      "doi": "10.48550/arXiv.2104.12933",
+      "url": "https://doi.org/10.48550/arXiv.2104.12933"
     },
     {
       "id": "paper-1016-j-procs-2017-05-101",
@@ -264,8 +266,8 @@
     {
       "id": "paper-electron-ptychography-images-hydrogen-atom",
       "title": "Electron Ptychography Images Hydrogen Atom Superlattices and 3D Inhomogeneities in Palladium Hydride Nanoparticles",
-      "authors": "Schuyler Shi",
-      "date": "2024",
+      "authors": "Z. Shi et al.",
+      "date": "2025",
       "type": "期刊论文",
       "summary": "",
       "category": "3d-ptychography-imaging",
@@ -273,7 +275,9 @@
         "叠层成像"
       ],
       "read": false,
-      "teamIds": []
+      "teamIds": [],
+      "doi": "10.1021/jacs.5c13741",
+      "url": "https://doi.org/10.1021/jacs.5c13741"
     },
     {
       "id": "paper-1038-s41467-017-00150-1",
@@ -319,7 +323,9 @@
         "叠层成像"
       ],
       "read": false,
-      "teamIds": []
+      "teamIds": [],
+      "doi": "10.1364/OL.36.002227",
+      "url": "https://doi.org/10.1364/OL.36.002227"
     },
     {
       "id": "paper-1063-pt-3-4835",
@@ -340,8 +346,8 @@
     {
       "id": "paper-high-resolution-three-dimensional-structur",
       "title": "High resolution three dimensional structural microscopy by single angle Bragg ptychography",
-      "authors": "",
-      "date": "2015",
+      "authors": "S. O. Hruszkewycz et al.",
+      "date": "2017",
       "type": "期刊论文",
       "summary": "",
       "category": "3d-ptychography-imaging",
@@ -349,7 +355,9 @@
         "叠层成像"
       ],
       "read": false,
-      "teamIds": []
+      "teamIds": [],
+      "doi": "10.1038/nmat4798",
+      "url": "https://doi.org/10.1038/nmat4798"
     },
     {
       "id": "paper-high-resolution-3d-ptychography",
@@ -606,7 +614,7 @@
       "title": "Quantitative 3D imaging of highly distorted micro-crystals using Bragg ptychography",
       "authors": "Peng Li; David Yang; Christoph Rau; Marc Allain; Felix Hofmann; Virginie Chamard",
       "date": "2026",
-      "type": "期刊论文",
+      "type": "预印本",
       "summary": "",
       "category": "3d-ptychography-imaging",
       "tags": [
@@ -714,7 +722,7 @@
       "title": "Towards single-shot coherent imaging via overlap-free ptychography",
       "authors": "Oliver Hoidn; Albert Vong; Aashwin Mishra; Steven Henke; Matthew Seaberg",
       "date": "2026",
-      "type": "期刊论文",
+      "type": "预印本",
       "summary": "",
       "category": "3d-ptychography-imaging",
       "tags": [
@@ -941,7 +949,9 @@
         "叠层成像"
       ],
       "read": false,
-      "teamIds": []
+      "teamIds": [],
+      "doi": "10.1126/sciadv.aeb4305",
+      "url": "https://doi.org/10.1126/sciadv.aeb4305"
     },
     {
       "id": "paper-1126-science-adg3183",
@@ -971,7 +981,9 @@
         "叠层成像"
       ],
       "read": false,
-      "teamIds": []
+      "teamIds": [],
+      "doi": "10.1038/srep09827",
+      "url": "https://doi.org/10.1038/srep09827"
     },
     {
       "id": "paper-1038-srep26348",
