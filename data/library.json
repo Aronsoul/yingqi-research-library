@@ -1127,7 +1127,23 @@
   "treeNodes": [
     "ptychographic-transmission-2012"
   ],
-  "resources": [],
-  "resourceCategories": [],
+  "resources": [
+    {
+      "title": "光学器件图(PPT)",
+      "category": "c19fd09e-8cd2-4d62-b7b1-ae9647acd383",
+      "url": "https://www.gwoptics.org/ComponentLibrary/",
+      "summary": "在PPT中绘制光路时可使用的已有的器件图",
+      "teamIds": [],
+      "id": "82695fc6-07b4-49a4-b9f3-fde1b32a9a09"
+    }
+  ],
+  "resourceCategories": [
+    {
+      "name": "光学器件图",
+      "parentId": null,
+      "teamIds": [],
+      "id": "c19fd09e-8cd2-4d62-b7b1-ae9647acd383"
+    }
+  ],
   "teams": []
 }
