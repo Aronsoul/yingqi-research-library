@@ -4,3 +4,9 @@
 .paper-dialog .resource-dialog-head{padding-bottom:8px}
 .paper-dialog .resource-dialog-details{min-height:36px}
 @media(max-width:640px){.paper-row{gap:10px}.paper-row .resource-row-main strong{font-size:14px}.paper-row .resource-row-tags{max-width:42%}}
+
+.project-row{cursor:default}
+.project-row .resource-row-tags a{display:inline-flex;align-items:center;padding:6px 12px;border-radius:18px;background:#4057bb;color:#fff;font-size:12px;text-decoration:none;white-space:nowrap}
+.project-row .resource-row-tags a:hover{background:#3449a5}
+.paper-row .resource-row-main small{white-space:nowrap;line-height:1.6}
+@media(max-width:640px){.project-row{align-items:flex-start;padding:15px 6px}.project-row .resource-row-main strong{font-size:14px}.project-row .resource-row-tags{max-width:42%}.paper-row .resource-row-main small{white-space:normal}}
