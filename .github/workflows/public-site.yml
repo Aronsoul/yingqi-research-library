@@ -2,9 +2,9 @@ name: Public website
 on:
   push:
     branches: [main]
-    paths: ['public-site/**', 'data/library.json', 'website/app/globals.css', '.github/workflows/public-site.yml']
+    paths: ['public-site/**', 'data/library.json', 'data/assets/**', 'website/app/globals.css', '.github/workflows/public-site.yml']
   pull_request:
-    paths: ['public-site/**', 'data/library.json', 'website/app/globals.css', '.github/workflows/public-site.yml']
+    paths: ['public-site/**', 'data/library.json', 'data/assets/**', 'website/app/globals.css', '.github/workflows/public-site.yml']
   workflow_dispatch:
 permissions:
   contents: read
