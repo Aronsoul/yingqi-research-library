@@ -24,7 +24,8 @@
           "alt": "ddf6647b-0b54-4b51-949e-ed9b0066f7a0.png"
         }
       ],
-      "read": false
+      "read": false,
+      "researchDirectionId": "direction-axial-resolution"
     },
     {
       "id": "ptychographic-transmission-2012",
@@ -70,7 +71,8 @@
         "X 射线",
         "多层劳厄透镜"
       ],
-      "type": "期刊论文"
+      "type": "期刊论文",
+      "researchDirectionId": "direction-axial-resolution"
     },
     {
       "id": "near-field-optimization-2019",
@@ -84,7 +86,8 @@
       "tags": "近场叠层成像，三维优化，GA-3ePIE",
       "read": true,
       "teamIds": [],
-      "type": "期刊论文"
+      "type": "期刊论文",
+      "researchDirectionId": "4ee03ec7-04e2-40e1-88e3-632b83f0174d"
     },
     {
       "id": "three-dimensional-single-shot-2020",
@@ -100,7 +103,8 @@
       "details": "",
       "teamIds": [],
       "images": [],
-      "read": true
+      "read": true,
+      "researchDirectionId": "9f4fc9cb-e670-40e3-bf2a-7994aaccbf53"
     },
     {
       "id": "tilted-illumination-2021",
@@ -117,7 +121,7 @@
       "teamIds": [],
       "images": [],
       "read": true,
-      "researchDirectionId": "direction-axial-resolution"
+      "researchDirectionId": "9f4fc9cb-e670-40e3-bf2a-7994aaccbf53"
     },
     {
       "id": "virtual-depth-scan-2021",
@@ -148,7 +152,8 @@
       "tags": "多束叠层成像，多切片，X 射线",
       "read": true,
       "teamIds": [],
-      "type": "期刊论文"
+      "type": "期刊论文",
+      "researchDirectionId": "abd6963c-bc24-416d-aaf4-230b44d9be84"
     },
     {
       "id": "paper-1038-s41467-026-69733-1",
@@ -1211,7 +1216,14 @@
     }
   ],
   "teams": [],
-  "treeExcludedNodes": [],
+  "treeExcludedNodes": [
+    "near-field-optimization-2019",
+    "three-dimensional-single-shot-2020",
+    "76726db7-2820-4328-9946-8621462f0d80",
+    "multibeam-multislice-2025",
+    "tilted-illumination-2021",
+    "multislice-mll-2018"
+  ],
   "directions": [
     {
       "id": "direction-axial-resolution",
@@ -1219,13 +1231,85 @@
       "parentPaperId": "ptychographic-transmission-2012",
       "papers": [
         {
+          "id": "76726db7-2820-4328-9946-8621462f0d80"
+        },
+        {
           "id": "ptychographic-microscope-2014"
         },
         {
-          "id": "tilted-illumination-2021"
+          "id": "multislice-mll-2018"
         },
         {
           "id": "virtual-depth-scan-2021"
+        }
+      ],
+      "teamIds": [],
+      "directionPapers": [
+        {
+          "id": "76726db7-2820-4328-9946-8621462f0d80"
+        },
+        {
+          "id": "ptychographic-microscope-2014"
+        },
+        {
+          "id": "multislice-mll-2018"
+        },
+        {
+          "id": "virtual-depth-scan-2021"
+        }
+      ]
+    },
+    {
+      "title": "有限实验时间内，保证分辨率的同时获取更大视场",
+      "parentPaperId": "ptychographic-transmission-2012",
+      "teamIds": [],
+      "directionPapers": [
+        {
+          "id": "multibeam-multislice-2025"
+        }
+      ],
+      "id": "abd6963c-bc24-416d-aaf4-230b44d9be84",
+      "papers": [
+        {
+          "id": "multibeam-multislice-2025"
+        }
+      ]
+    },
+    {
+      "title": "提高对分布不均匀样品的重建质量",
+      "parentPaperId": "ptychographic-transmission-2012",
+      "teamIds": [],
+      "directionPapers": [
+        {
+          "id": "near-field-optimization-2019"
+        }
+      ],
+      "id": "4ee03ec7-04e2-40e1-88e3-632b83f0174d",
+      "papers": [
+        {
+          "id": "near-field-optimization-2019"
+        }
+      ]
+    },
+    {
+      "title": "提高重建速度",
+      "parentPaperId": "ptychographic-transmission-2012",
+      "teamIds": [],
+      "directionPapers": [
+        {
+          "id": "three-dimensional-single-shot-2020"
+        },
+        {
+          "id": "tilted-illumination-2021"
+        }
+      ],
+      "id": "9f4fc9cb-e670-40e3-bf2a-7994aaccbf53",
+      "papers": [
+        {
+          "id": "three-dimensional-single-shot-2020"
+        },
+        {
+          "id": "tilted-illumination-2021"
         }
       ]
     }
