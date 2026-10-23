@@ -1,19 +1,89 @@
 'use client';
 import {useState} from 'react';
-import {Plus,Network,X,ArrowUpRight} from 'lucide-react';
+import {Plus,Network,X,ArrowUpRight,ArrowLeft} from 'lucide-react';
 type Props={data:any;save:(data:any)=>Promise<boolean>;busy:boolean};
+type Scope={major:string;subcategory?:string};
+const GROUPS=[
+ {id:'imaging',name:'成像方法',categories:['三维断层','多层重建','电子叠层成像','单次曝光','傅里叶叠层成像','布拉格叠层成像','近场叠层成像','偏振成像','扫描与采集']},
+ {id:'algorithm',name:'算法与重建',categories:['算法与计算','学习辅助重建']},
+ {id:'applications',name:'应用领域',categories:['集成电路','材料应用','生物应用']},
+ {id:'literature',name:'文献整理',categories:['综述','待核验']}
+];
+const categoryOf=(paper:any)=>String(paper?.category||'未分类').trim()||'未分类';
 export default function LiteratureTree({data,save,busy}:Props){
- const [adding,A]=useState(false),[parent,P]=useState(''),[paper,S]=useState(''),[label,L]=useState(''),[error,E]=useState('');
+ const [scope,setScope]=useState<Scope|null>(null),[adding,A]=useState(false),[parent,P]=useState(''),[paper,S]=useState(''),[label,L]=useState(''),[error,E]=useState('');
  const papers=new Map<string,any>(data.papers.map((p:any)=>[p.id,p]));
- const ids=new Set<string>([...(data.treeNodes||[]),...data.relations.flatMap((r:any)=>[r.from,r.to])].filter((id:string)=>papers.has(id)));
+ const categories=[...new Set<string>(data.papers.map((p:any)=>categoryOf(p)))].sort((a,b)=>a.localeCompare(b,'zh-CN'));
+ const assigned=new Set(GROUPS.flatMap(g=>g.categories));
+ const groups:any[]=GROUPS.map(g=>({...g,categories:categories.filter(c=>g.categories.includes(c))})).filter(g=>g.categories.length);
+ const extra=categories.filter(c=>!assigned.has(c));
+ if(extra.length)groups.push({id:'other',name:'其他分类',categories:extra});
+ const activeGroup=scope?groups.find(g=>g.id===scope.major):null;
+ const activeCategories=scope?(scope.subcategory?[scope.subcategory]:(activeGroup?.categories||[])):[];
+ const categorySet=new Set(activeCategories);
+ const scopedPapers=scope?data.papers.filter((p:any)=>categorySet.has(categoryOf(p))):[];
+ const ids=new Set<string>(scopedPapers.map((p:any)=>p.id));
  const edges=data.relations.filter((r:any)=>ids.has(r.from)&&ids.has(r.to));
  const incoming=new Set<string>(edges.map((r:any)=>r.to));
  const roots=[...ids].filter(id=>!incoming.has(id));
- // Retain visibility of imported cyclic components without recursively looping.
- const covered=new Set<string>();function visit(id:string){if(covered.has(id))return;covered.add(id);edges.filter((r:any)=>r.from===id).forEach((r:any)=>visit(r.to))}roots.forEach(visit);for(const id of ids)if(!covered.has(id)){roots.push(id);visit(id)}
- function add(from=''){P(from);S('');L('');E('');A(true)}
- async function submit(e:any){e.preventDefault();if(!papers.has(paper))return E('请选择文献');if(ids.has(paper))return E('这篇文献已在树中，请选择其他文献');const saved=await save({...data,treeNodes:[...ids,paper],relations:parent?[...data.relations,{id:crypto.randomUUID(),from:parent,to:paper,label:label.trim()}]:data.relations});if(saved)A(false)}
- function remove(id:string){if(confirm('仅将该节点移出树状图？文献保留，子节点将成为独立分支。'))save({...data,treeNodes:[...ids].filter(x=>x!==id),relations:data.relations.filter((r:any)=>r.from!==id&&r.to!==id)})}
- function branch(id:string,path:Set<string>,edge?:any):any{const p=papers.get(id);if(!p)return null;const loop=path.has(id);const next=new Set(path).add(id);return <li key={edge?.id||id} className={edge?'tree-relation-node':undefined}>{edge&&<div className="tree-edge-wrap"><span className="tree-edge-line tree-edge-line-before" aria-hidden="true"/><div className="tree-edge">{edge.label||'研究延伸'}</div><span className="tree-edge-line tree-edge-line-after" aria-hidden="true"/></div>}<article className="tree-paper"><span className="tree-year">{p.date?.slice(0,4)||'年份待补充'}</span><h3>{p.title}</h3><p>{p.summary||'暂无简介'}</p><div className="tree-actions">{p.url&&<a href={p.url} target="_blank" rel="noreferrer">打开文献 <ArrowUpRight size={12}/></a>}<button disabled={busy} onClick={()=>add(id)}><Plus size={12}/>添加分支</button><button disabled={busy} onClick={()=>remove(id)}>移除节点</button></div>{loop&&<small>循环关联已停止展开</small>}</article>{!loop&&edges.some((r:any)=>r.from===id)&&<ul>{edges.filter((r:any)=>r.from===id).map((r:any)=>branch(r.to,next,r))}</ul>}</li>}
- return <div className="literature-tree"><div className="tree-toolbar"><div><Network size={17}/><strong>文献研究脉络</strong><span>由上至下展示研究的延伸与分支</span></div><button className="primary" disabled={busy} onClick={()=>add()}><Plus size={15}/>添加根节点</button></div>{!ids.size?<div className="empty"><Network size={38}/><h3>树状图留白，等待你的第一条研究脉络</h3><p>从已有文献中选择根节点，再逐步添加分支和关联说明。</p><button className="primary" onClick={()=>add()}><Plus size={15}/>选择文献，开始构建</button></div>:<><div className="tree-scroll"><ul className="tree-roots">{roots.map(id=>branch(id,new Set()))}</ul></div><p className="tree-hint">可横向滚动查看分支。移除节点只删除图中关联，文献库中的原始文献会保留。</p><details className="tree-links"><summary>管理关联连线（{edges.length}）</summary>{edges.map((r:any)=><div key={r.id}><span>{papers.get(r.from)?.title} → {papers.get(r.to)?.title}<small>{r.label}</small></span><button disabled={busy} onClick={()=>{if(confirm('删除这条连线？两个文献节点将保留。'))save({...data,treeNodes:[...ids],relations:data.relations.filter((x:any)=>x.id!==r.id)})}}>删除连线</button></div>)}</details></>}{adding&&<div className="overlay"><div className="dialog"><button className="close" onClick={()=>A(false)} aria-label="关闭"><X/></button><h2>{parent?'添加文献分支':'添加根节点'}</h2><form onSubmit={submit}><label>上级文献<select value={parent} onChange={e=>P(e.target.value)}><option value="">无，作为独立根节点</option>{[...ids].map(id=><option key={id} value={id}>{papers.get(id)?.title}</option>)}</select></label><label>选择文献<select required value={paper} onChange={e=>S(e.target.value)}><option value="">请选择已有文献</option>{data.papers.filter((p:any)=>!ids.has(p.id)).map((p:any)=><option key={p.id} value={p.id}>{p.title}</option>)}</select></label>{parent&&<label>连线说明<input value={label} onChange={e=>L(e.target.value)} placeholder="如：方法改进、引入多层模型…"/></label>}{error&&<p role="alert">{error}</p>}<p className="muted">仅添加你选中的文献，不自动填充其他节点。</p><div className="actions"><button type="button" onClick={()=>A(false)}>取消</button><button className="primary" disabled={busy}>{busy?'保存中…':'添加到树状图'}</button></div></form></div></div>}</div>
+ // Keep imported cyclic components visible without recursing forever.
+ const covered=new Set<string>();
+ function visit(id:string){if(covered.has(id))return;covered.add(id);edges.filter((r:any)=>r.from===id).forEach((r:any)=>visit(r.to))}
+ roots.forEach(visit);for(const id of ids)if(!covered.has(id)){roots.push(id);visit(id)}
+ function add(from:string){P(from);S('');L('');E('');A(true)}
+ async function submit(e:any){
+  e.preventDefault();
+  if(!scope||!ids.has(parent))return E('请先选择有效的图谱范围和上级文献');
+  if(!ids.has(paper))return E('请选择当前范围内的关联文献');
+  if(parent===paper)return E('请选择不同的文献');
+  if(data.relations.some((r:any)=>r.from===parent&&r.to===paper))return E('这两篇文献已有连线');
+  if(data.relations.some((r:any)=>r.to===paper))return E('该文献已有上级，请先删除原连线');
+  const seen=new Set<string>();
+  const reachesParent=(id:string):boolean=>{
+   if(id===parent)return true;
+   if(seen.has(id))return false;
+   seen.add(id);
+   return data.relations.filter((r:any)=>r.from===id).some((r:any)=>reachesParent(r.to));
+  };
+  if(reachesParent(paper))return E('该关联会形成循环，请调整上下级文献');
+  const saved=await save({...data,relations:[...data.relations,{id:crypto.randomUUID(),from:parent,to:paper,label:label.trim()}]});
+  if(saved)A(false);
+ }
+ function branch(id:string,path:Set<string>,edge?:any):any{
+  const p=papers.get(id);if(!p)return null;
+  const loop=path.has(id),next=new Set(path).add(id);
+  return <li key={edge?.id||id} className={edge?'tree-relation-node':undefined}>
+   {edge&&<div className="tree-edge-wrap"><span className="tree-edge-line tree-edge-line-before" aria-hidden="true"/><div className="tree-edge">{edge.label||'研究延伸'}</div><span className="tree-edge-line tree-edge-line-after" aria-hidden="true"/></div>}
+   <article className="tree-paper"><span className="tree-year">{p.date?.slice(0,4)||'年份待补充'}</span><h3>{p.title}</h3><p>{p.summary||'暂无简介'}</p><div className="tree-actions">{p.url&&<a href={p.url} target="_blank" rel="noreferrer">打开文献 <ArrowUpRight size={12}/></a>}<button disabled={busy||!scope} onClick={()=>add(id)}><Plus size={12}/>添加关联</button></div>{loop&&<small>循环关联已停止展开</small>}</article>
+   {!loop&&edges.some((r:any)=>r.from===id)&&<ul>{edges.filter((r:any)=>r.from===id).map((r:any)=>branch(r.to,next,r))}</ul>}
+  </li>
+ }
+ const paperCount=(category:string)=>data.papers.filter((p:any)=>categoryOf(p)===category).length;
+ return <div className="literature-tree">
+  <div className="tree-toolbar"><div><Network size={17}/><strong>知识图谱</strong><span>先选大类或子类，再加载对应文献图谱</span></div></div>
+  {!scope?<div className="tree-category-overview">
+   {groups.length?groups.map(group=>{
+    const groupPapers=data.papers.filter((p:any)=>group.categories.includes(categoryOf(p)));
+    return <section className="tree-category-group" key={group.id}>
+     <div className="tree-category-group-head"><div><strong>{group.name}</strong><small>{group.categories.length} 个子类 · {groupPapers.length} 篇文献</small></div><button className="primary" onClick={()=>setScope({major:group.id})}>查看整个大类图谱</button></div>
+     <div className="tree-subcategories">{group.categories.map((category:string)=><button className="tree-subcategory" key={category} onClick={()=>setScope({major:group.id,subcategory:category})}><span>{category}<small>{paperCount(category)} 篇文献</small></span><ArrowUpRight size={14}/></button>)}</div>
+    </section>
+   }):<div className="empty"><Network size={38}/><h3>文献库中还没有分类</h3><p>为文献设置分类后，这里会自动显示对应的大类和子类。</p></div>}
+  </div>:<>
+   <div className="tree-scope-toolbar">
+    <button className="tree-back" onClick={()=>setScope(null)}><ArrowLeft size={14}/>返回分类总览</button>
+    <div className="tree-scope-switch" aria-label="切换图谱范围">
+     <button className={!scope.subcategory?'selected':''} onClick={()=>setScope({major:scope.major})}>整个大类</button>
+     {activeGroup?.categories.map((category:string)=><button key={category} className={scope.subcategory===category?'selected':''} onClick={()=>setScope({major:scope.major,subcategory:category})}>{category}</button>)}
+    </div>
+    <span className="tree-scope-count">{scope.subcategory?scope.subcategory:activeGroup?.name||'分类'} · {scopedPapers.length} 篇文献 · {edges.length} 条关联</span>
+   </div>
+   {!scopedPapers.length?<div className="empty"><Network size={38}/><h3>该分类下暂无文献</h3><p>为文献添加或修改分类后，这里会自动更新。</p></div>:<>
+    <div className="tree-scroll"><ul className="tree-roots">{roots.map(id=>branch(id,new Set()))}</ul></div>
+    <p className="tree-hint">图谱自动包含当前范围内的全部文献；只显示该范围内两端文献都在此分类中的关联。</p>
+    <details className="tree-links"><summary>管理当前范围的关联（{edges.length}）</summary>{edges.length?edges.map((r:any)=><div key={r.id}><span>{papers.get(r.from)?.title} → {papers.get(r.to)?.title}<small>{r.label}</small></span><button disabled={busy} onClick={()=>{if(confirm('删除这条连线？文献会继续保留在对应分类图谱中。'))save({...data,relations:data.relations.filter((x:any)=>x.id!==r.id)})}}>删除连线</button></div>):<p className="muted">当前范围还没有关联。</p>}</details>
+   </>}
+  </>}
+  {adding&&<div className="overlay"><div className="dialog"><button className="close" onClick={()=>A(false)} aria-label="关闭"><X/></button><p className="eyebrow">知识图谱</p><h2>添加文献关联</h2><form onSubmit={submit}><label>上级文献<input readOnly value={papers.get(parent)?.title||''}/></label><label>关联文献<select required value={paper} onChange={e=>S(e.target.value)}><option value="">请选择当前范围内的文献</option>{scopedPapers.filter((p:any)=>p.id!==parent&&!data.relations.some((r:any)=>r.to===p.id)).map((p:any)=><option key={p.id} value={p.id}>{p.title}</option>)}</select></label><label>关系说明<input value={label} onChange={e=>L(e.target.value)} placeholder="如：方法改进、引入多层模型…"/></label>{error&&<p role="alert">{error}</p>}<p className="muted">只会在当前分类范围内建立关联。</p><div className="actions"><button type="button" onClick={()=>A(false)}>取消</button><button className="primary" disabled={busy}>{busy?'保存中…':'保存关联'}</button></div></form></div></div>}
+ </div>
 }
