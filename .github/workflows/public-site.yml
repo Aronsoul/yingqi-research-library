@@ -2,9 +2,9 @@ name: Public website
 on:
   push:
     branches: [main]
-    paths: ['public-site/**', 'data/library.json', 'data/assets/**', 'website/app/globals.css', '.github/workflows/public-site.yml']
+    paths: ['shared/**', 'public-site/**', 'data/library.json', 'data/assets/**', 'website/app/globals.css', '.github/workflows/public-site.yml']
   pull_request:
-    paths: ['public-site/**', 'data/library.json', 'data/assets/**', 'website/app/globals.css', '.github/workflows/public-site.yml']
+    paths: ['shared/**', 'public-site/**', 'data/library.json', 'data/assets/**', 'website/app/globals.css', '.github/workflows/public-site.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -23,6 +23,8 @@ jobs:
         run: |
           node --check public-site/app.js
           node --check public-site/admin.js
+      - name: Check graph rules
+        run: node --test shared/graph-model.test.mjs
       - name: Build and validate literature data
         run: node public-site/build.mjs
       - uses: actions/upload-pages-artifact@v4
@@ -45,3 +47,5 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+
+

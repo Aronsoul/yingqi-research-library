@@ -1,8 +1,9 @@
+import {normalizeGraph,validateGraph} from '../shared/graph-model.mjs';
 import {readFile,mkdir,copyFile,writeFile,rm,readdir,access} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const here=path.dirname(fileURLToPath(import.meta.url)),root=path.dirname(here),out=path.join(root,'public-dist');
-const data=JSON.parse(await readFile(path.join(root,'data/library.json'),'utf8'));
+const data=normalizeGraph(JSON.parse(await readFile(path.join(root,'data/library.json'),'utf8')));validateGraph(data);
 for(const key of ['papers','projects','relations','categories'])if(!Array.isArray(data[key]))throw Error('Invalid '+key);
 const ids=new Set();for(const p of data.papers){if(!p.id||ids.has(p.id)||!p.title)throw Error('Paper requires unique id and title');ids.add(p.id)}
 const categoryIds=new Set();for(const c of data.categories){if(!c.id||categoryIds.has(c.id)||!c.name)throw Error('Category requires a unique id and name');categoryIds.add(c.id)}
@@ -12,13 +13,14 @@ for(const item of [...data.papers,...data.projects,...(data.resources||[])])for(
 for(const c of data.categories){const seen=new Set([c.id]);let parent=c.parentId;while(parent){if(seen.has(parent))throw Error('Category hierarchy contains a cycle: '+c.id);seen.add(parent);parent=data.categories.find(x=>x.id===parent)?.parentId||null}}
 for(const p of data.papers)if(p.category&&!categoryIds.has(p.category))throw Error('Paper refers to missing category: '+p.id);
 for(const r of data.relations)if(!ids.has(r.from)||!ids.has(r.to))throw Error('Relation refers to missing paper');
-const directionIds=new Set(),directionPaperIds=new Set(),graphEdges=new Map();const addGraphEdge=(from,to)=>{const list=graphEdges.get(from)||[];list.push(to);graphEdges.set(from,list)};for(const relation of data.relations)addGraphEdge(relation.from,relation.to);for(const direction of data.directions||[]){if(!direction.id||directionIds.has(direction.id)||ids.has(direction.id)||!direction.title?.trim()||(direction.parentPaperId&&!ids.has(direction.parentPaperId))||!Array.isArray(direction.papers))throw Error('Direction requires a unique id, title, optional valid parent and paper list');directionIds.add(direction.id);if(direction.parentPaperId)addGraphEdge(direction.parentPaperId,direction.id);if(!direction.parentPaperId&&direction.papers.length)throw Error('Unplaced direction cannot contain papers: '+direction.id);const local=new Set();for(const paper of direction.papers){if(!paper||!ids.has(paper.id)||local.has(paper.id)||paper.id===direction.parentPaperId||directionPaperIds.has(paper.id))throw Error('Direction has an invalid or duplicated paper: '+direction.id);local.add(paper.id);directionPaperIds.add(paper.id);addGraphEdge(direction.id,paper.id)}}for(const paper of data.papers||[])if(paper.researchDirectionId){const direction=(data.directions||[]).find(item=>item.id===paper.researchDirectionId);if(!direction)throw Error('Paper refers to missing research direction: '+paper.id);if(!(direction.papers||[]).some(item=>item.id===paper.id))throw Error('Paper direction assignment is inconsistent: '+paper.id);const parent=(data.papers||[]).find(item=>item.id===direction.parentPaperId);if(!parent||parent.category!==paper.category)throw Error('Paper direction does not match its major category: '+paper.id)}const visiting=new Set(),visited=new Set();function visitGraph(id){if(visiting.has(id))throw Error('Knowledge graph contains a cycle: '+id);if(visited.has(id))return;visiting.add(id);for(const child of graphEdges.get(id)||[])visitGraph(child);visiting.delete(id);visited.add(id)}for(const id of [...ids,...directionIds])visitGraph(id);
+
 for(const resource of data.resources||[])if(!resource.id||!resource.title||resource.path&&!resource.path.startsWith('data/assets/'))throw Error('Resource has invalid metadata: '+resource.id);
 for(const paper of data.papers||[])if(paper.images!==undefined){if(!Array.isArray(paper.images)||paper.images.length>12)throw Error('Paper has invalid images: '+paper.id);for(const image of paper.images){if(!image||image.kind!=='file'||!/^data\/assets\/[0-9a-f-]{36}$/i.test(image.path)||!image.mediaType?.startsWith('image/'))throw Error('Paper has invalid image: '+paper.id);await access(path.join(root,image.path))}}
 const resourceCategoryIds=new Set((data.resourceCategories||[]).map(c=>c.id));
 for(const resource of data.resources||[]){if(resource.category&&!resourceCategoryIds.has(resource.category))throw Error('Resource refers to missing category: '+resource.id);if(resource.images!==undefined&&!Array.isArray(resource.images))throw Error('Resource has invalid images: '+resource.id);for(const asset of [resource,...(resource.images||[])])if(asset.path){if(!/^data\/assets\/[0-9a-f-]{36}$/i.test(asset.path))throw Error('Resource has invalid asset path: '+resource.id);await access(path.join(root,asset.path))}}
 await rm(out,{recursive:true,force:true});await mkdir(out,{recursive:true});
-for(const file of ['index.html','app.js','resource.css','admin.html','admin.js','admin.css','admin-config.json'])await copyFile(path.join(here,file),path.join(out,file));
+for(const file of ['index.html','app.js','resource.css','admin.html','admin.js','admin.css','admin-config.json','graph-view.mjs','graph.css'])await copyFile(path.join(here,file),path.join(out,file));
+await copyFile(path.join(root,'shared/graph-model.mjs'),path.join(out,'graph-model.mjs'));
 async function copyAssets(source,target){let entries;try{entries=await readdir(source,{withFileTypes:true})}catch(error){if(error.code==='ENOENT')return;throw error}await mkdir(target,{recursive:true});for(const entry of entries){const from=path.join(source,entry.name),to=path.join(target,entry.name);if(entry.isDirectory())await copyAssets(from,to);else if(entry.isFile())await copyFile(from,to)}}
 await copyAssets(path.join(root,'data/assets'),path.join(out,'assets'));
 const css=await readFile(path.join(root,'website/app/globals.css'),'utf8');
@@ -29,8 +31,12 @@ const assetVersion=(process.env.GITHUB_SHA||Date.now().toString(36)).slice(0,12)
 for(const page of ['index.html','admin.html']){
  const file=path.join(out,page);
  let html=await readFile(file,'utf8');
- for(const asset of ['styles.css','app.js','resource.css','admin.css','admin.js'])html=html.replaceAll('"./'+asset+'"','"./'+asset+'?v='+assetVersion+'"');
+ for(const asset of ['styles.css','app.js','resource.css','admin.css','admin.js','graph.css'])html=html.replaceAll('"./'+asset+'"','"./'+asset+'?v='+assetVersion+'"');
  await writeFile(file,html);
 }
+await writeFile(path.join(out,'release.json'),JSON.stringify({commit:process.env.GITHUB_SHA||'local',builtAt:new Date().toISOString()}));
+for(const file of ['app.js','admin.js','graph-view.mjs']){const target=path.join(out,file);let js=(await readFile(target,'utf8')).replaceAll('../shared/graph-model.mjs','./graph-model.mjs');for(const dep of ['graph-model.mjs','graph-view.mjs'])js=js.replaceAll("'./"+dep+"'","'./"+dep+'?v='+assetVersion+"'");await writeFile(target,js)}
 console.log(`Built public-dist: ${data.papers.length} papers, ${data.relations.length} relations, ${(data.resources||[]).length} resources`);
+
+
 
