@@ -40,20 +40,23 @@ return `<div class="literature-tree"><div class="tree-toolbar"><div><strong>知�
 function bindTreeZoom(){
 const scroll=$('content').querySelector('.tree-scroll'),stage=$('content').querySelector('.tree-stage'),canvas=$('content').querySelector('.tree-roots'),level=$('content').querySelector('.tree-zoom-level'),out=$('content').querySelector('[data-tree-zoom="out"]'),inn=$('content').querySelector('[data-tree-zoom="in"]');
 if(!scroll||!stage||!canvas)return;
-const minZoom=.1,maxZoom=3;
-const apply=()=>{stage.style.width=(canvas.offsetWidth*treeZoom)+'px';stage.style.height=(canvas.offsetHeight*treeZoom)+'px';canvas.style.transformOrigin='top left';canvas.style.transform='scale('+treeZoom+')';level.textContent=Math.round(treeZoom*100)+'%';out.disabled=treeZoom<=minZoom;inn.disabled=treeZoom>=maxZoom};
-const zoomAt=(next,x,y)=>{next=Math.max(minZoom,Math.min(maxZoom,next));const before=canvas.getBoundingClientRect(),pointX=(x-before.left)/treeZoom,pointY=(y-before.top)/treeZoom;treeZoom=next;apply();const after=canvas.getBoundingClientRect();scroll.scrollLeft+=after.left+pointX*treeZoom-x;scroll.scrollTop+=after.top+pointY*treeZoom-y};
+const minZoom=.1,maxZoom=3;let panX=0,panY=0,baseWidth=0,baseHeight=0,baseLeft=0,baseTop=0;
+stage.style.width=scroll.clientWidth+'px';stage.style.height=scroll.clientHeight+'px';stage.style.margin='0';canvas.style.position='absolute';canvas.style.minWidth='max-content';
+baseWidth=canvas.offsetWidth;baseHeight=canvas.offsetHeight;
+const layout=()=>{stage.style.width=scroll.clientWidth+'px';stage.style.height=scroll.clientHeight+'px';baseLeft=Math.max(0,(scroll.clientWidth-baseWidth)/2);baseTop=Math.max(16,(scroll.clientHeight-baseHeight)/2);canvas.style.left=baseLeft+'px';canvas.style.top=baseTop+'px';apply()};
+const apply=()=>{stage.style.width=scroll.clientWidth+'px';stage.style.height=scroll.clientHeight+'px';canvas.style.transformOrigin='top left';canvas.style.transform='translate('+panX+'px,'+panY+'px) scale('+treeZoom+')';level.textContent=Math.round(treeZoom*100)+'%';out.disabled=treeZoom<=minZoom;inn.disabled=treeZoom>=maxZoom};
+const zoomAt=(next,x,y)=>{next=Math.max(minZoom,Math.min(maxZoom,next));const rect=stage.getBoundingClientRect(),pointX=(x-rect.left-baseLeft-panX)/treeZoom,pointY=(y-rect.top-baseTop-panY)/treeZoom;treeZoom=next;panX=x-rect.left-baseLeft-pointX*treeZoom;panY=y-rect.top-baseTop-pointY*treeZoom;apply()};
 const zoomFromButton=direction=>{const rect=scroll.getBoundingClientRect(),factor=direction==='in'?1.2:1/1.2;zoomAt(Math.round(treeZoom*factor*100)/100,rect.left+scroll.clientWidth/2,rect.top+scroll.clientHeight/2)};
 out.addEventListener('click',()=>zoomFromButton('out'));inn.addEventListener('click',()=>zoomFromButton('in'));
-$('content').querySelector('[data-tree-zoom="reset"]').addEventListener('click',()=>{const rect=scroll.getBoundingClientRect();zoomAt(1,rect.left+scroll.clientWidth/2,rect.top+scroll.clientHeight/2)});
+$('content').querySelector('[data-tree-zoom="reset"]').addEventListener('click',()=>{panX=0;panY=0;treeZoom=1;layout()});
 scroll.addEventListener('wheel',event=>{event.preventDefault();zoomAt(treeZoom*Math.exp(-event.deltaY*.002),event.clientX,event.clientY)},{passive:false});
 let drag=null,suppressClick=false;
-scroll.addEventListener('pointerdown',event=>{if(event.button!==0||event.target.closest('a,button'))return;drag={id:event.pointerId,x:event.clientX,y:event.clientY,left:scroll.scrollLeft,top:scroll.scrollTop,moved:false};scroll.setPointerCapture(event.pointerId)});
-scroll.addEventListener('pointermove',event=>{if(!drag||drag.id!==event.pointerId)return;const dx=event.clientX-drag.x,dy=event.clientY-drag.y;if(!drag.moved&&(Math.abs(dx)>3||Math.abs(dy)>3)){drag.moved=true;scroll.classList.add('is-panning')}if(drag.moved){scroll.scrollLeft=drag.left-dx;scroll.scrollTop=drag.top-dy;suppressClick=true}});
+scroll.addEventListener('pointerdown',event=>{if(event.button!==0||event.target.closest('a,button'))return;drag={id:event.pointerId,x:event.clientX,y:event.clientY,panX,panY,moved:false};scroll.setPointerCapture(event.pointerId)});
+scroll.addEventListener('pointermove',event=>{if(!drag||drag.id!==event.pointerId)return;const dx=event.clientX-drag.x,dy=event.clientY-drag.y;if(!drag.moved&&(Math.abs(dx)>3||Math.abs(dy)>3)){drag.moved=true;scroll.classList.add('is-panning')}if(drag.moved){panX=drag.panX+dx;panY=drag.panY+dy;apply();suppressClick=true}});
 const finishDrag=event=>{if(!drag||drag.id!==event.pointerId)return;const moved=drag.moved;drag=null;scroll.classList.remove('is-panning');if(scroll.hasPointerCapture(event.pointerId))scroll.releasePointerCapture(event.pointerId);if(moved)setTimeout(()=>{suppressClick=false},0)};
 scroll.addEventListener('pointerup',finishDrag);scroll.addEventListener('pointercancel',finishDrag);
 scroll.addEventListener('click',event=>{if(!suppressClick)return;event.preventDefault();event.stopPropagation();suppressClick=false},true);
-apply()
+layout();if('ResizeObserver'in window){const observer=new ResizeObserver(layout);observer.observe(scroll)}
 }
 function renderCategoryPicker(rows,selected,lookup){
 const roots=rows.filter(c=>!c.parentId||!rows.some(parent=>parent.id===c.parentId)),selectedRow=rows.find(c=>c.id===selected),label=selectedRow?.name||'全部分类';
