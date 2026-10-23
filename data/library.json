@@ -1089,7 +1089,8 @@
       "id": "r-2012-2014",
       "from": "ptychographic-transmission-2012",
       "to": "ptychographic-microscope-2014",
-      "label": "实验发展：多切片三维显微成像"
+      "label": "通过改进光源，提升轴向分辨率",
+      "teamIds": []
     },
     {
       "id": "r-2014-2018",
@@ -1101,7 +1102,8 @@
       "id": "r-2012-2019-space",
       "from": "ptychographic-transmission-2012",
       "to": "near-field-optimization-2019",
-      "label": "三维空间优化与近场重建"
+      "label": "提高对分布不均匀样品的重建质量",
+      "teamIds": []
     },
     {
       "id": "r-2012-2019-tomo",
@@ -1114,25 +1116,29 @@
       "id": "r-2012-2020",
       "from": "ptychographic-transmission-2012",
       "to": "three-dimensional-single-shot-2020",
-      "label": "发展为单次曝光三维重建"
+      "label": "提高重建速度，使其能用于捕获动态事件。",
+      "teamIds": []
     },
     {
       "id": "r-2020-2021-tilt",
       "from": "three-dimensional-single-shot-2020",
       "to": "tilted-illumination-2021",
-      "label": "高倾角照明增强轴向能力"
+      "label": "高倾角照明增强轴向能力，实现动态成像的同时提高轴向的分辨率能力。Ptychography需要足够多的迭代次数以降低重建误差。SSP的核心迭代次数由所记录的子衍射图数所决定。3DSSP探测遵循近轴近似且迭代计算中采用常见的菲涅尔衍射原理。这使得最外层传播角限制在相对于光轴几个度数范围内。器技仅能记录到少数不同的衍射图，因此重建结果质量差。同时目前缺乏解决分辨能力和可达空间分辨率的完全非近轴方法与样品透射对大入射角的不稳定响应",
+      "teamIds": []
     },
     {
       "id": "r-2014-2021-vdsp",
       "from": "ptychographic-microscope-2014",
       "to": "virtual-depth-scan-2021",
-      "label": "虚拟深度扫描扩展成像深度"
+      "label": "通过算法提高轴向分辨率。 虚拟深度扫描扩展成像深度",
+      "teamIds": []
     },
     {
       "id": "r-2012-2025",
       "from": "ptychographic-transmission-2012",
       "to": "multibeam-multislice-2025",
-      "label": "多束照明与多切片联合"
+      "label": "有限实验时间内，保证分辨率的同时获取更大视场",
+      "teamIds": []
     }
   ],
   "categories": [
@@ -1167,6 +1173,12 @@
       "parentId": "3d-ptychography-imaging",
       "teamIds": [],
       "id": "a1858294-bd25-4b67-8ff9-abb8bfb2d0ec"
+    },
+    {
+      "name": "提升轴向分辨率",
+      "parentId": "3d-ptychography-imaging",
+      "teamIds": [],
+      "id": "d58278cd-e276-4611-851d-ebc51a334685"
     }
   ],
   "treeNodes": [
