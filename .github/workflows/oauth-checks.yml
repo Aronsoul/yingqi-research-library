@@ -1,10 +1,10 @@
 name: OAuth service checks
 on:
   pull_request:
-    paths: ['oauth-service/**', '.github/workflows/oauth-checks.yml']
+    paths: ['shared/**', 'oauth-service/**', '.github/workflows/oauth-checks.yml']
   push:
     branches: [main]
-    paths: ['oauth-service/**', '.github/workflows/oauth-checks.yml']
+    paths: ['shared/**', 'oauth-service/**', '.github/workflows/oauth-checks.yml']
 permissions:
   contents: read
 jobs:
@@ -17,3 +17,5 @@ jobs:
           node-version: '24'
       - run: node --check oauth-service/worker.mjs
       - run: node --test oauth-service/worker.test.mjs
+
+
