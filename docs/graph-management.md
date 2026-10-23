@@ -21,3 +21,5 @@ Read legacy direction membership lists and remove redundant `directionPapers` an
 
 Run `node --test shared/graph-model.test.mjs oauth-service/worker.test.mjs` and `node public-site/build.mjs`. Shared changes trigger both public-site and authorization-service workflows. Browser checks should cover conflict resolution, saving and reopening, membership-only edits, scoped candidate selection, and connector geometry with long labels.
 
+Direction-to-paper placements may store optional `graphLabels` keyed by the attached paper ID. These labels are edited alongside graph article selection and rendered on the placement arrows in both views. Membership edits preserve them; removing a placement removes only that placement's label. Labels have no character limit.
+
