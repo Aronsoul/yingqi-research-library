@@ -19,3 +19,25 @@ aside{overflow-y:auto}.categoryhead{flex-shrink:0}.cat{flex-shrink:0}.sidebottom
 .tree-stage{position:relative;margin:0 auto}
 .tree-roots{transform-origin:top left}
 .tree-scroll{overscroll-behavior:contain}
+
+/* Category-scoped knowledge graph */
+.tree-category-overview{display:grid;gap:16px;margin-top:24px}
+.tree-category-group{background:#fff;border:1px solid #e2e6dd;border-radius:10px;padding:18px}
+.tree-category-group-head{display:flex;justify-content:space-between;align-items:center;gap:14px}
+.tree-category-group-head>div{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tree-category-group-head strong{font-size:15px;font-weight:600}
+.tree-category-group-head small{font-size:11px;color:#829078}
+.tree-category-group-head .primary{padding:8px 12px;font-size:11px}
+.tree-subcategories{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px;margin-top:15px}
+.tree-subcategory{justify-content:space-between;text-align:left;padding:10px 12px;border-color:#e6ebe1;background:#fbfcf9;font-size:12px}
+.tree-subcategory:hover{border-color:#b9c9ad;background:#f4f7f0}
+.tree-subcategory>span{display:grid;gap:4px}
+.tree-subcategory small{font-size:10px;color:#8b9780}
+.tree-scope-toolbar{display:grid;gap:12px;margin:20px 0 14px}
+.tree-back{justify-self:start;padding:6px 9px;border:0;background:transparent;color:#63765b;font-size:11px}
+.tree-back:hover{background:#eef2e9}
+.tree-scope-switch{display:flex;gap:7px;flex-wrap:wrap}
+.tree-scope-switch button{padding:7px 10px;font-size:11px;color:#63765b}
+.tree-scope-switch button.selected{background:#496b4b;border-color:#496b4b;color:#fff}
+.tree-scope-count{font-size:11px;color:#829078}
+@media(max-width:700px){.tree-category-group{padding:13px}.tree-category-group-head{align-items:flex-start;flex-direction:column}.tree-category-group-head>div{gap:6px}.tree-category-group-head .primary{align-self:flex-start}.tree-subcategories{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}.tree-scope-switch button{padding:6px 8px}}
