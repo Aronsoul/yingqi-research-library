@@ -99,7 +99,7 @@
       "details": "",
       "teamIds": [],
       "images": [],
-      "read": false
+      "read": true
     },
     {
       "id": "tilted-illumination-2021",
@@ -115,7 +115,7 @@
       "details": "",
       "teamIds": [],
       "images": [],
-      "read": false
+      "read": true
     },
     {
       "id": "virtual-depth-scan-2021",
