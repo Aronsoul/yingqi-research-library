@@ -41,3 +41,17 @@ aside{overflow-y:auto}.categoryhead{flex-shrink:0}.cat{flex-shrink:0}.sidebottom
 .tree-scope-switch button.selected{background:#496b4b;border-color:#496b4b;color:#fff}
 .tree-scope-count{font-size:11px;color:#829078}
 @media(max-width:700px){.tree-category-group{padding:13px}.tree-category-group-head{align-items:flex-start;flex-direction:column}.tree-category-group-head>div{gap:6px}.tree-category-group-head .primary{align-self:flex-start}.tree-subcategories{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}.tree-scope-switch button{padding:6px 8px}}
+
+/* Literature category editor and graph node actions */
+.dialog select optgroup{font-weight:600;color:#53684c}
+.dialog select option{font-weight:400;color:#344438}
+.tree-paper-interactive{cursor:pointer;transition:border-color .16s,box-shadow .16s,transform .16s}
+.tree-paper-interactive:hover,.tree-paper-interactive:focus-visible{border-color:#91aa82;box-shadow:0 5px 18px #42583112;transform:translateY(-2px);outline:none}
+.tree-paper-interactive:focus-visible{outline:2px solid #7c9c6d;outline-offset:3px}
+.tree-node-dialog h2{font-size:17px;line-height:1.65;overflow-wrap:anywhere}
+.tree-node-options{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 14px}
+.tree-node-options .danger{color:#a95248;border-color:#e7cfc9}
+.tree-node-options .danger:hover{background:#fff3f0}
+.tree-add-node{justify-self:start;font-size:11px;padding:7px 11px;color:#56754c}
+.tree-add-node:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:700px){.tree-node-options{flex-direction:column}.tree-node-options button{width:100%}}
