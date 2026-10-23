@@ -100,6 +100,8 @@ $('filters').hidden=isTree;
 $('category-filter').hidden=isTree||isTeams||isProjects;
 $('type-filter').hidden=!isPapers;
 $('read-filter').hidden=!isPapers;
+$('project-section-filter').hidden=!isProjects;
+$('project-author-filter').hidden=!isProjects;
 $('year-filter').hidden=isTree||isResources||isTeams;
 $('content-title').textContent=isResources?'资料库':view==='projects'?'研究成果':isTree?'知识图谱':isTeams?'研究团队':'文献库';
 $('query').placeholder=isResources?'标题、分类或简介':isTeams?'团队、地区、负责人或团队内容':isProjects?'题目、作者次序、分区、IF 或简介':'标题、作者、关键词或简介';
@@ -110,16 +112,18 @@ renderCategoryPicker(categoryRows,selectedCategory,lookup);
 const types=['综述','期刊论文','会议论文','学位论文','补充材料','预印本'],selectedType=$('type').value;
 $('type').innerHTML='<option value="">全部类型</option>'+types.map(t=>'<option value="'+esc(t)+'">'+esc(t)+'</option>').join('');
 $('type').value=selectedType;
+const selectedSection=$('project-section').value,sections=[...new Set((data.projects||[]).map(p=>p.section).filter(Boolean))].sort();$('project-section').innerHTML='<option value="">全部分区</option>'+sections.map(section=>'<option value="'+esc(section)+'">'+esc(section)+'</option>').join('');$('project-section').value=selectedSection;
+const selectedAuthorOrder=$('project-author-order').value,orders=[...new Set((data.projects||[]).map(p=>Number(p.authorOrder)).filter(n=>Number.isInteger(n)&&n>0))].sort((x,y)=>x-y);$('project-author-order').innerHTML='<option value="">全部作者次序</option>'+orders.map(n=>'<option value="'+n+'">'+(n===1?'第一作者':'第 '+n+' 作者')+'</option>').join('');$('project-author-order').value=selectedAuthorOrder;
 const q=$('query').value.trim().toLowerCase();
 if(isTeams){$('content').innerHTML=teamsView(q);return}
 if(isTree){$('content').innerHTML=tree();$('content').querySelectorAll('[data-tree-scope]').forEach(b=>b.onclick=()=>{treeScope=b.dataset.treeScope;render()});const back=$('content').querySelector('[data-tree-back]');if(back)back.onclick=()=>{treeScope=null;render()};bindTreeZoom();return}
-const category=$('category').value,year=$('year').value.trim(),sort=$('sort').value,type=$('type').value,readStatus=$('read-status').value;
+const category=$('category').value,year=$('year').value.trim(),sort=$('sort').value,type=$('type').value,readStatus=$('read-status').value,projectSection=$('project-section').value,projectAuthorOrder=$('project-author-order').value;
 let rows=isResources?(data.resources||[]):view==='projects'?data.projects:data.papers;
 if(category&&!isProjects){const descendants=new Set(categoryRows.filter(c=>{let p=c;const seen=new Set();while(p&&!seen.has(p.id)){if(p.id===category)return true;seen.add(p.id);p=lookup(p.parentId)}return false}).map(c=>c.id));rows=rows.filter(p=>descendants.has(p.category)||p.category===category)}
-rows=rows.filter(p=>JSON.stringify(p).toLowerCase().includes(q)&&(!year||String(p.date||'').startsWith(year))&&(!isPapers||!type||p.type===type)&&(!isPapers||!readStatus||(readStatus==='read'?p.read===true:p.read!==true))).slice().sort((a,b)=>sort==='title'?(a.title||'').localeCompare(b.title||''):sort==='old'?(a.date||'').localeCompare(b.date||''):(b.date||'').localeCompare(a.date||''));
+rows=rows.filter(p=>JSON.stringify(p).toLowerCase().includes(q)&&(!year||String(p.date||'').startsWith(year))&&(!isPapers||!type||p.type===type)&&(!isPapers||!readStatus||(readStatus==='read'?p.read===true:p.read!==true))&&(!isProjects||!projectSection||p.section===projectSection)&&(!isProjects||!projectAuthorOrder||String(p.authorOrder||'')===projectAuthorOrder)).slice().sort((a,b)=>sort==='title'?(a.title||'').localeCompare(b.title||''):sort==='old'?(a.date||'').localeCompare(b.date||''):(b.date||'').localeCompare(a.date||''));
 $('content').innerHTML=rows.length?'<div class="'+(isResources||isPapers||view==='projects'?'resource-list':'cards')+'">'+rows.map(isResources?resourceCard:isPapers?paperCard:projectRow).join('')+'</div>':'<div class="empty"><h3>暂无匹配内容</h3><p>可在资料管理中添加'+(isResources?'链接或文件。':'文献或成果。')+'</p>'+(isResources?'<a class="primary" href="./admin.html">打开资料管理 ↗</a>':'')+'</div>'
 if(isResources)bindResourceRows();if(isPapers)bindPaperRows();
 }
-document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x===b));$('query').value='';$('category').value='';$('year').value='';$('type').value='';$('read-status').value='';render()});
-$('query').oninput=render;['category','type','year','read-status','sort'].forEach(id=>$(id).oninput=render);
+document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x===b));$('query').value='';$('category').value='';$('year').value='';$('type').value='';$('read-status').value='';$('project-section').value='';$('project-author-order').value='';render()});
+$('query').oninput=render;['category','type','year','read-status','sort','project-section','project-author-order'].forEach(id=>$(id).oninput=render);
 fetch('./library.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('资料读取失败，请刷新重试');return r.json()}).then(x=>{data={...data,...x};data.categories||=[];data.resourceCategories||=[];data.resources||=[];populateFilters();$('stats').innerHTML=[['收藏文献',data.papers.length],['文献关联',data.relations.length],['研究成果',data.projects.length],['资料文件/链接',data.resources.length],['研究团队',data.teams.length]].map(([label,n])=>`<div><label>${label}</label><strong>${n}</strong></div>`).join('');$('status').textContent='';render()}).catch(e=>$('status').textContent=e.message);
