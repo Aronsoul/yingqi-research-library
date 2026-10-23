@@ -1233,7 +1233,12 @@
         "76726db7-2820-4328-9946-8621462f0d80",
         "ptychographic-microscope-2014",
         "virtual-depth-scan-2021"
-      ]
+      ],
+      "graphLabels": {
+        "76726db7-2820-4328-9946-8621462f0d80": "与断层算法进行耦合",
+        "ptychographic-microscope-2014": "改进光学系统",
+        "virtual-depth-scan-2021": "通过算法方式"
+      }
     },
     {
       "title": "提高重建速度",
