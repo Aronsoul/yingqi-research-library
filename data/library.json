@@ -53,7 +53,8 @@
         "三维显微",
         "多切片"
       ],
-      "type": "期刊论文"
+      "type": "期刊论文",
+      "researchDirectionId": "direction-axial-resolution"
     },
     {
       "id": "multislice-mll-2018",
@@ -115,7 +116,8 @@
       "details": "",
       "teamIds": [],
       "images": [],
-      "read": true
+      "read": true,
+      "researchDirectionId": "direction-axial-resolution"
     },
     {
       "id": "virtual-depth-scan-2021",
@@ -131,7 +133,8 @@
         "多切片",
         "VDSP"
       ],
-      "type": "期刊论文"
+      "type": "期刊论文",
+      "researchDirectionId": "direction-axial-resolution"
     },
     {
       "id": "multibeam-multislice-2025",
