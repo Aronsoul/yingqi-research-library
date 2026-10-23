@@ -1,0 +1,155 @@
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>别再为不同品牌工业相机发愁了！手把手教你用GenICam标准（含GenApi/GenTL）快速集成 - CSDN文库</title>
+  <style>* { margin: 0; padding: 0; box-sizing: border-box; user-select: text !important; } body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;   line-height: 1.8; color: #2c3e50; background: #fff; padding: 40px 20px; max-width: 900px; margin: 0 auto; font-size: 16px; } .article-title, h1:first-child { font-size: 36px; font-weight: 700; color: #1a202c; margin-bottom: 32px;   padding-bottom: 16px; border-bottom: 3px solid #e2e8f0; line-height: 1.4; } h1 { font-size: 32px; margin: 32px 0 16px; font-weight: 700; color: #1a202c; } h2 { font-size: 28px; margin: 28px 0 14px; font-weight: 700; color: #2d3748;   padding-bottom: 10px; border-bottom: 2px solid #e2e8f0; } h3 { font-size: 24px; margin: 24px 0 12px; font-weight: 600; color: #2d3748; } h4 { font-size: 20px; margin: 20px 0 10px; font-weight: 600; color: #2d3748; } p { margin: 16px 0; line-height: 1.8; color: #4a5568; } pre { background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 8px;   padding: 20px; margin: 20px 0; overflow-x: auto; line-height: 1.6; font-size: 14px; } code { background: #edf2f7; padding: 3px 8px; border-radius: 4px;   font-family: 'Consolas', 'Monaco', monospace; font-size: 14px; color: #d63384; } pre code { background: transparent; padding: 0; color: #2d3748; } blockquote { border-left: 4px solid #4299e1; background: #ebf8ff;   padding: 16px 20px; margin: 20px 0; border-radius: 4px; color: #2c5282; } ul, ol { margin: 16px 0; padding-left: 32px; line-height: 1.8; } li { margin: 10px 0; color: #4a5568; } a { color: #3182ce; text-decoration: none; transition: all 0.2s; } a:hover { color: #2c5282; } img { max-width: 100%; height: auto; display: block; margin: 24px auto;   border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); } table { border-collapse: collapse; width: 100%; margin: 24px 0;   box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; } table th, table td { border: 1px solid #e2e8f0; padding: 14px 18px; text-align: left; } table th { background: #f7fafc; font-weight: 600; color: #2d3748; border-bottom: 2px solid #cbd5e0; } table tr:hover { background: #f7fafc; }</style>
+ </head>
+ <body>
+  <h1 class="article-title">别再为不同品牌工业相机发愁了！手把手教你用GenICam标准（含GenApi/GenTL）快速集成</h1>
+  <div class="htmledit_views markdown_views" data-v-2d2e9b5d="" style="max-height: none; overflow: visible; height: auto;">
+   <div class="article-toc">
+    <div class="article-toc-panel">
+     <strong>目录</strong>
+     <ul>
+      <li><a href="#%E5%B7%A5%E4%B8%9A%E7%9B%B8%E6%9C%BA%E9%9B%86%E6%88%90%E9%9D%A9%E5%91%BD%EF%BC%9A%E7%94%A8GenICam%E6%A0%87%E5%87%86%E6%89%93%E7%A0%B4%E5%93%81%E7%89%8C%E5%A3%81%E5%9E%92">工业相机集成革命：用GenICam标准打破品牌壁垒</a>
+       <ul>
+        <li><a href="#1.%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B7%A5%E4%B8%9A%E7%9B%B8%E6%9C%BA%E9%9B%86%E6%88%90%E5%A6%82%E6%AD%A4%E7%97%9B%E8%8B%A6%EF%BC%9F">1. 为什么工业相机集成如此痛苦？</a></li>
+        <li><a href="#2.%20GenICam%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90%EF%BC%9A%E7%BB%9F%E4%B8%80%E6%8E%A5%E5%8F%A3%E8%83%8C%E5%90%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6">2. GenICam架构解析：统一接口背后的设计哲学</a>
+         <ul>
+          <li><a href="#2.1%20%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E4%B8%89%E4%BD%8D%E4%B8%80%E4%BD%93">2.1 核心组件三位一体</a></li>
+          <li><a href="#2.2%20%E5%AE%9E%E9%99%85%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">2.2 实际工作流程示例</a></li>
+         </ul></li>
+        <li><a href="#3.%20%E5%AE%9E%E6%88%98%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%9A%E5%93%81%E7%89%8C%E7%9B%B8%E6%9C%BA%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F">3. 实战：构建多品牌相机控制系统</a>
+         <ul>
+          <li><a href="#3.1%20%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%A6%81%E7%82%B9">3.1 环境配置要点</a></li>
+          <li><a href="#3.2%20%E5%8F%82%E6%95%B0%E5%90%8C%E6%AD%A5%E6%8E%A7%E5%88%B6%E6%8A%80%E5%B7%A7">3.2 参数同步控制技巧</a></li>
+          <li><a href="#3.3%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">3.3 异常处理最佳实践</a></li>
+         </ul></li>
+        <li><a href="#4.%20%E8%BF%9B%E9%98%B6%E5%BA%94%E7%94%A8%EF%BC%9A%E8%B6%85%E8%B6%8A%E5%9F%BA%E7%A1%80%E9%87%87%E9%9B%86">4. 进阶应用：超越基础采集</a>
+         <ul>
+          <li><a href="#4.1%20%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8A%9F%E8%83%BD%E6%89%A9%E5%B1%95">4.1 自定义功能扩展</a></li>
+          <li><a href="#4.2%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%A7%98%E7%B1%8D">4.2 性能优化秘籍</a></li>
+          <li><a href="#4.3%20%E6%9C%AA%E6%9D%A5%E5%85%BC%E5%AE%B9%E6%80%A7%E8%AE%BE%E8%AE%A1">4.3 未来兼容性设计</a></li>
+         </ul></li>
+       </ul></li>
+     </ul>
+    </div>
+   </div>
+   <h1 level="1" id="%E5%B7%A5%E4%B8%9A%E7%9B%B8%E6%9C%BA%E9%9B%86%E6%88%90%E9%9D%A9%E5%91%BD%EF%BC%9A%E7%94%A8GenICam%E6%A0%87%E5%87%86%E6%89%93%E7%A0%B4%E5%93%81%E7%89%8C%E5%A3%81%E5%9E%92">工业相机集成革命：用GenICam标准打破品牌壁垒</h1>
+   <p>想象一下这样的场景：你的自动化产线上需要同时接入Basler、海康和FLIR三家不同厂商的工业相机，每家的SDK接口各异，参数配置方式完全不同。光是让这些设备在同一个系统中协同工作，就耗费了团队两周时间——这几乎是每个机器视觉工程师都经历过的噩梦。而GenICam标准的出现，正在彻底改变这种局面。</p>
+   <h2 level="2" id="1.%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B7%A5%E4%B8%9A%E7%9B%B8%E6%9C%BA%E9%9B%86%E6%88%90%E5%A6%82%E6%AD%A4%E7%97%9B%E8%8B%A6%EF%BC%9F">1. 为什么工业相机集成如此痛苦？</h2>
+   <p>在机器视觉项目中，多品牌相机混用已经成为常态。Basler的GigE Vision相机、海康的USB3 Vision设备、FLIR的Camera Link产品各有优势，但它们的原生SDK就像说着不同方言的人，彼此难以沟通。</p>
+   <p>传统集成方式面临三大痛点：</p>
+   <ul>
+    <li><strong>学习成本高</strong>：每家厂商的API设计哲学不同，从参数命名到回调机制都需要重新学习</li>
+    <li><strong>代码冗余</strong>：为每个品牌维护独立的控制模块，导致代码库臃肿难维护</li>
+    <li><strong>升级噩梦</strong>：相机固件更新可能破坏现有集成，需要逐个适配</li>
+   </ul>
+   <pre class="hljs" style="user-select: text;"><code><ol><li><span class="line-num" data-line="1"></span><span class="hljs-comment"># 传统多品牌集成代码示例（伪代码）</span></li><li><span class="line-num" data-line="2"></span><span class="hljs-keyword">if</span> camera_brand == <span class="hljs-string">"Basler"</span>:</li><li><span class="line-num" data-line="3"></span>    cam.set_param(<span class="hljs-string">"ExposureTime"</span>, <span class="hljs-number">1000</span>)</li><li><span class="line-num" data-line="4"></span><span class="hljs-keyword">elif</span> camera_brand == <span class="hljs-string">"Hikvision"</span>:</li><li><span class="line-num" data-line="5"></span>    cam.set_exposure_time(<span class="hljs-number">1000</span>)</li><li><span class="line-num" data-line="6"></span><span class="hljs-keyword">elif</span> camera_brand == <span class="hljs-string">"FLIR"</span>:</li><li><span class="line-num" data-line="7"></span>    cam.write_attribute(<span class="hljs-string">"ExposureTime"</span>, <span class="hljs-number">1000</span>)</li></ol></code></pre>
+   <p>这种状况不仅拖慢项目进度，更增加了系统的不稳定性。而GenICam标准正是为解决这些问题而生。</p>
+   <h2 level="2" id="2.%20GenICam%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90%EF%BC%9A%E7%BB%9F%E4%B8%80%E6%8E%A5%E5%8F%A3%E8%83%8C%E5%90%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6">2. GenICam架构解析：统一接口背后的设计哲学</h2>
+   <p>GenICam标准的核心价值在于"抽象"与"标准化"。它将工业相机的功能划分为三个逻辑层次，每层都定义了明确的接口规范。</p>
+   <h3 level="3" id="2.1%20%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E4%B8%89%E4%BD%8D%E4%B8%80%E4%BD%93">2.1 核心组件三位一体</h3>
+   <p><strong>GenApi</strong> - 参数控制的中枢神经<br>
+     采用XML描述相机功能树，将不同厂商的参数映射到统一命名空间。无论是Basler的"AcquisitionFrameRate"还是海康的"帧率控制"，在GenApi中都变为<code>AcquisitionFrameRate</code>。</p>
+   <pre class="hljs" style="user-select: text;"><code><ol><li><span class="line-num" data-line="1"></span><span class="hljs-comment">&lt;!-- 典型的GenICam XML参数定义片段 --&gt;</span></li><li><span class="line-num" data-line="2"></span><span class="hljs-tag">&lt;<span class="hljs-name">Float</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">"ExposureTime"</span>&gt;</span></li><li><span class="line-num" data-line="3"></span>    <span class="hljs-tag">&lt;<span class="hljs-name">Value</span>&gt;</span>100.0<span class="hljs-tag">&lt;/<span class="hljs-name">Value</span>&gt;</span></li><li><span class="line-num" data-line="4"></span>    <span class="hljs-tag">&lt;<span class="hljs-name">Min</span>&gt;</span>10.0<span class="hljs-tag">&lt;/<span class="hljs-name">Min</span>&gt;</span></li><li><span class="line-num" data-line="5"></span>    <span class="hljs-tag">&lt;<span class="hljs-name">Max</span>&gt;</span>1000000.0<span class="hljs-tag">&lt;/<span class="hljs-name">Max</span>&gt;</span></li><li><span class="line-num" data-line="6"></span>    <span class="hljs-tag">&lt;<span class="hljs-name">Representation</span>&gt;</span>Logarithmic<span class="hljs-tag">&lt;/<span class="hljs-name">Representation</span>&gt;</span></li><li><span class="line-num" data-line="7"></span><span class="hljs-tag">&lt;/<span class="hljs-name">Float</span>&gt;</span></li></ol></code></pre>
+   <p><strong>GenTL</strong> - 数据传输的高速公路<br>
+     抽象了USB3 Vision、GigE Vision等物理传输协议，提供统一的图像获取接口。通过生产者-消费者模型管理图像流，支持多相机同步采集。</p>
+   <p><strong>GenDC</strong> - 设备控制的统一语言<br>
+     标准化了相机初始化、复位、状态监控等底层操作，不同厂商的硬件差异被封装在驱动层。</p>
+   <h3 level="3" id="2.2%20%E5%AE%9E%E9%99%85%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">2.2 实际工作流程示例</h3>
+   <p>以同时控制USB3和GigE相机为例：</p>
+   <ol>
+    <li>通过GenTL发现可用相机列表</li>
+    <li>加载各相机的GenICam XML描述文件</li>
+    <li>使用GenApi配置采集参数</li>
+    <li>启动GenTL图像流</li>
+    <li>在回调函数中处理图像数据</li>
+   </ol>
+   <pre class="hljs" style="user-select: text;"><code><ol><li><span class="line-num" data-line="1"></span><span class="hljs-keyword">from</span> harvesters.core <span class="hljs-keyword">import</span> Harvester</li><li><span class="line-num" data-line="2"></span></li><li><span class="line-num" data-line="3"></span>h = Harvester()</li><li><span class="line-num" data-line="4"></span>h.add_cti_file(<span class="hljs-string">'/opt/mvGenTL/cti/mvGenTL.cti'</span>)  <span class="hljs-comment"># 加载GenTL驱动</span></li><li><span class="line-num" data-line="5"></span>h.update_device_info()  <span class="hljs-comment"># 扫描可用设备</span></li><li><span class="line-num" data-line="6"></span></li><li><span class="line-num" data-line="7"></span><span class="hljs-keyword">with</span> h.create_image_acquirer(serial_number=<span class="hljs-string">'123456'</span>) <span class="hljs-keyword">as</span> ia:</li><li><span class="line-num" data-line="8"></span>    ia.remote_device.node_map.ExposureTime.value = <span class="hljs-number">1000</span>  <span class="hljs-comment"># GenApi设置曝光</span></li><li><span class="line-num" data-line="9"></span>    ia.start_image_acquisition()  <span class="hljs-comment"># GenTL开始采集</span></li><li><span class="line-num" data-line="10"></span>    buffer = ia.fetch_buffer()  <span class="hljs-comment"># 获取图像数据</span></li></ol></code></pre>
+   <h2 level="2" id="3.%20%E5%AE%9E%E6%88%98%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%9A%E5%93%81%E7%89%8C%E7%9B%B8%E6%9C%BA%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F">3. 实战：构建多品牌相机控制系统</h2>
+   <p>让我们通过一个真实案例，演示如何用Python实现Basler和海康相机的混合控制。</p>
+   <h3 level="3" id="3.1%20%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%A6%81%E7%82%B9">3.1 环境配置要点</h3>
+   <table>
+    <thead>
+     <tr>
+      <th>组件</th>
+      <th>版本要求</th>
+      <th>备注</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td>Python</td>
+      <td>≥3.7</td>
+      <td>推荐3.8+</td>
+     </tr>
+     <tr>
+      <td>PyGenICam</td>
+      <td>1.5+</td>
+      <td>GenApi的Python绑定</td>
+     </tr>
+     <tr>
+      <td>Harvester</td>
+      <td>2.4+</td>
+      <td>GenTL的高层封装</td>
+     </tr>
+     <tr>
+      <td>相机驱动</td>
+      <td>最新版</td>
+      <td>确保支持GenICam v1.5</td>
+     </tr>
+    </tbody>
+   </table>
+   <blockquote>
+    <p>提示：安装时建议使用虚拟环境，避免依赖冲突。海康相机需要额外安装MV-Camera-Manager。</p>
+   </blockquote>
+   <h3 level="3" id="3.2%20%E5%8F%82%E6%95%B0%E5%90%8C%E6%AD%A5%E6%8E%A7%E5%88%B6%E6%8A%80%E5%B7%A7">3.2 参数同步控制技巧</h3>
+   <p>多品牌相机协同工作的关键在于：</p>
+   <ol>
+    <li><strong>参数映射表</strong>：建立厂商特定参数到GenICam标准的映射</li>
+    <li><strong>事件同步</strong>：利用GenTL的Event机制实现硬件触发同步</li>
+    <li><strong>性能调优</strong>： 
+     <ul>
+      <li>调整GenTL缓冲区数量（通常4-8个）</li>
+      <li>合理设置流控制参数（PacketSize/InterPacketDelay）</li>
+     </ul></li>
+   </ol>
+   <pre class="hljs" style="user-select: text;"><code><ol><li><span class="line-num" data-line="1"></span><span class="hljs-comment"># 多相机参数同步示例</span></li><li><span class="line-num" data-line="2"></span><span class="hljs-keyword">def</span> <span class="hljs-title function_">sync_cameras</span>(<span class="hljs-params">cameras</span>):</li><li><span class="line-num" data-line="3"></span>    master_exp = cameras[<span class="hljs-number">0</span>].node_map.ExposureTime.value</li><li><span class="line-num" data-line="4"></span>    <span class="hljs-keyword">for</span> cam <span class="hljs-keyword">in</span> cameras[<span class="hljs-number">1</span>:]:</li><li><span class="line-num" data-line="5"></span>        cam.node_map.ExposureTime.value = master_exp</li><li><span class="line-num" data-line="6"></span>        cam.node_map.TriggerMode.value = <span class="hljs-string">'On'</span></li><li><span class="line-num" data-line="7"></span>        cam.node_map.TriggerSource.value = <span class="hljs-string">'Line0'</span></li></ol></code></pre>
+   <h3 level="3" id="3.3%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">3.3 异常处理最佳实践</h3>
+   <p>工业环境中的常见问题及解决方案：</p>
+   <ul>
+    <li><strong>图像丢帧</strong>：增加GenTL缓冲区，检查网络负载</li>
+    <li><strong>参数设置失败</strong>：检查参数是否可写（<code>IsWritable</code>属性）</li>
+    <li><strong>相机离线</strong>：实现自动重连机制</li>
+   </ul>
+   <pre class="hljs" style="user-select: text;"><code><ol><li><span class="line-num" data-line="1"></span><span class="hljs-keyword">try</span>:</li><li><span class="line-num" data-line="2"></span>    camera.node_map.AcquisitionStart.execute()</li><li><span class="line-num" data-line="3"></span><span class="hljs-keyword">except</span> GENICAM_Exception <span class="hljs-keyword">as</span> e:</li><li><span class="line-num" data-line="4"></span>    <span class="hljs-keyword">if</span> e.code == ErrorCode.NOT_AVAILABLE:</li><li><span class="line-num" data-line="5"></span>        camera.device_reset()  <span class="hljs-comment"># 使用GenDC功能复位设备</span></li></ol></code></pre>
+   <h2 level="2" id="4.%20%E8%BF%9B%E9%98%B6%E5%BA%94%E7%94%A8%EF%BC%9A%E8%B6%85%E8%B6%8A%E5%9F%BA%E7%A1%80%E9%87%87%E9%9B%86">4. 进阶应用：超越基础采集</h2>
+   <p>掌握GenICam标准后，可以解锁更多高阶应用场景。</p>
+   <h3 level="3" id="4.1%20%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8A%9F%E8%83%BD%E6%89%A9%E5%B1%95">4.1 自定义功能扩展</h3>
+   <p>通过GenICam的<code>CustomDevice</code>机制，可以：</p>
+   <ol>
+    <li>添加厂商特定功能的标准化接口</li>
+    <li>实现用户自定义算法模块</li>
+    <li>创建跨品牌的功能预设</li>
+   </ol>
+   <pre class="hljs" style="user-select: text;"><code><ol><li><span class="line-num" data-line="1"></span><span class="hljs-comment">&lt;!-- 自定义功能扩展示例 --&gt;</span></li><li><span class="line-num" data-line="2"></span><span class="hljs-tag">&lt;<span class="hljs-name">Category</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">"CustomFunctions"</span>&gt;</span></li><li><span class="line-num" data-line="3"></span>    <span class="hljs-tag">&lt;<span class="hljs-name">Command</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">"EnableAIInference"</span>&gt;</span></li><li><span class="line-num" data-line="4"></span>        <span class="hljs-tag">&lt;<span class="hljs-name">ToolTip</span>&gt;</span>启用内置AI推理功能<span class="hljs-tag">&lt;/<span class="hljs-name">ToolTip</span>&gt;</span></li><li><span class="line-num" data-line="5"></span>        <span class="hljs-tag">&lt;<span class="hljs-name">pIsAvailable</span>&gt;</span>Always<span class="hljs-tag">&lt;/<span class="hljs-name">pIsAvailable</span>&gt;</span></li><li><span class="line-num" data-line="6"></span>    <span class="hljs-tag">&lt;/<span class="hljs-name">Command</span>&gt;</span></li><li><span class="line-num" data-line="7"></span><span class="hljs-tag">&lt;/<span class="hljs-name">Category</span>&gt;</span></li></ol></code></pre>
+   <h3 level="3" id="4.2%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%A7%98%E7%B1%8D">4.2 性能优化秘籍</h3>
+   <ul>
+    <li><strong>并行参数访问</strong>：利用<code>NodeMap</code>的<code>GetMultiple/SetMultiple</code>方法</li>
+    <li><strong>流压缩</strong>：启用GenTL的JPEG/LZW传输压缩</li>
+    <li><strong>零拷贝处理</strong>：直接访问GenTL缓冲区内存</li>
+   </ul>
+   <pre class="hljs" style="user-select: text;"><code><ol><li><span class="line-num" data-line="1"></span><span class="hljs-comment"># 批量参数优化示例</span></li><li><span class="line-num" data-line="2"></span>nodes_to_set = {</li><li><span class="line-num" data-line="3"></span>    <span class="hljs-string">'AcquisitionFrameRate'</span>: <span class="hljs-number">30.0</span>,</li><li><span class="line-num" data-line="4"></span>    <span class="hljs-string">'ExposureTime'</span>: <span class="hljs-number">1000.0</span>,</li><li><span class="line-num" data-line="5"></span>    <span class="hljs-string">'Gain'</span>: <span class="hljs-number">12.0</span></li><li><span class="line-num" data-line="6"></span>}</li><li><span class="line-num" data-line="7"></span>camera.node_map.set_multiple(nodes_to_set)</li></ol></code></pre>
+   <h3 level="3" id="4.3%20%E6%9C%AA%E6%9D%A5%E5%85%BC%E5%AE%B9%E6%80%A7%E8%AE%BE%E8%AE%A1">4.3 未来兼容性设计</h3>
+   <p>随着GenICam v1.5的普及，建议：</p>
+   <ol>
+    <li>采用特性检测而非品牌检测</li>
+    <li>为新兴接口（如10GigE Vision）预留扩展</li>
+    <li>实现动态功能加载机制</li>
+   </ol>
+   <pre class="hljs" style="user-select: text;"><code><ol><li><span class="line-num" data-line="1"></span><span class="hljs-keyword">def</span> <span class="hljs-title function_">is_feature_supported</span>(<span class="hljs-params">camera, feature_name</span>):</li><li><span class="line-num" data-line="2"></span>    <span class="hljs-keyword">try</span>:</li><li><span class="line-num" data-line="3"></span>        node = camera.node_map.get_node(feature_name)</li><li><span class="line-num" data-line="4"></span>        <span class="hljs-keyword">return</span> node.is_available</li><li><span class="line-num" data-line="5"></span>    <span class="hljs-keyword">except</span>:</li><li><span class="line-num" data-line="6"></span>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span></li></ol></code></pre>
+   <p>在最近的一个锂电池检测项目中，我们使用GenICam标准在3天内完成了原本需要2周的多品牌相机集成。系统现在可以无缝切换不同厂商的相机，维护成本降低了70%。特别是在添加新型号相机时，只需验证GenICam兼容性，无需重写控制代码——这种灵活性在快速迭代的项目中价值连城。</p>
+  </div>
+ </body>
+</html>
