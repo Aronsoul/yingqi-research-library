@@ -19,7 +19,7 @@ for(const paper of data.papers||[])if(paper.images!==undefined){if(!Array.isArra
 const resourceCategoryIds=new Set((data.resourceCategories||[]).map(c=>c.id));
 for(const resource of data.resources||[]){if(resource.category&&!resourceCategoryIds.has(resource.category))throw Error('Resource refers to missing category: '+resource.id);if(resource.images!==undefined&&!Array.isArray(resource.images))throw Error('Resource has invalid images: '+resource.id);for(const asset of [resource,...(resource.images||[])])if(asset.path){if(!/^data\/assets\/[0-9a-f-]{36}$/i.test(asset.path))throw Error('Resource has invalid asset path: '+resource.id);await access(path.join(root,asset.path))}}
 await rm(out,{recursive:true,force:true});await mkdir(out,{recursive:true});
-for(const file of ['index.html','app.js','resource.css','admin.html','admin.js','admin.css','admin-config.json','graph-view.mjs','graph.css'])await copyFile(path.join(here,file),path.join(out,file));
+for(const file of ['index.html','app.js','resource.css','admin.html','admin.js','admin.css','admin-config.json','graph-view.mjs','graph.css','resource-categories.mjs','resource-categories.css'])await copyFile(path.join(here,file),path.join(out,file));
 await copyFile(path.join(root,'shared/graph-model.mjs'),path.join(out,'graph-model.mjs'));
 async function copyAssets(source,target){let entries;try{entries=await readdir(source,{withFileTypes:true})}catch(error){if(error.code==='ENOENT')return;throw error}await mkdir(target,{recursive:true});for(const entry of entries){const from=path.join(source,entry.name),to=path.join(target,entry.name);if(entry.isDirectory())await copyAssets(from,to);else if(entry.isFile())await copyFile(from,to)}}
 await copyAssets(path.join(root,'data/assets'),path.join(out,'assets'));
@@ -31,12 +31,13 @@ const assetVersion=(process.env.GITHUB_SHA||Date.now().toString(36)).slice(0,12)
 for(const page of ['index.html','admin.html']){
  const file=path.join(out,page);
  let html=await readFile(file,'utf8');
- for(const asset of ['styles.css','app.js','resource.css','admin.css','admin.js','graph.css'])html=html.replaceAll('"./'+asset+'"','"./'+asset+'?v='+assetVersion+'"');
+ for(const asset of ['styles.css','app.js','resource.css','admin.css','admin.js','graph.css','resource-categories.css'])html=html.replaceAll('"./'+asset+'"','"./'+asset+'?v='+assetVersion+'"');
  await writeFile(file,html);
 }
 await writeFile(path.join(out,'release.json'),JSON.stringify({commit:process.env.GITHUB_SHA||'local',builtAt:new Date().toISOString()}));
-for(const file of ['app.js','admin.js','graph-view.mjs']){const target=path.join(out,file);let js=(await readFile(target,'utf8')).replaceAll('../shared/graph-model.mjs','./graph-model.mjs');for(const dep of ['graph-model.mjs','graph-view.mjs'])js=js.replaceAll("'./"+dep+"'","'./"+dep+'?v='+assetVersion+"'");await writeFile(target,js)}
+for(const file of ['app.js','admin.js','graph-view.mjs']){const target=path.join(out,file);let js=(await readFile(target,'utf8')).replaceAll('../shared/graph-model.mjs','./graph-model.mjs');for(const dep of ['graph-model.mjs','graph-view.mjs','resource-categories.mjs'])js=js.replaceAll("'./"+dep+"'","'./"+dep+'?v='+assetVersion+"'");await writeFile(target,js)}
 console.log(`Built public-dist: ${data.papers.length} papers, ${data.relations.length} relations, ${(data.resources||[]).length} resources`);
+
 
 
 

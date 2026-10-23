@@ -1,3 +1,4 @@
+import {resourceCategoryPicker,bindResourceCategoryPickers} from './resource-categories.mjs';
 import {normalizeGraph,directionMembers,directionMajor} from '../shared/graph-model.mjs';
 import {renderGraph,graphScope as resolveGraphScope,bindConnections} from './graph-view.mjs';
 'use strict';
@@ -50,6 +51,8 @@ scroll.addEventListener('click',event=>{if(!suppressClick)return;event.preventDe
 layout();if('ResizeObserver'in window){const observer=new ResizeObserver(layout);observer.observe(scroll)}
 }
 function renderCategoryPicker(rows,selected,lookup,useDirections=false){
+if(view==='resources'){const host=$('category-picker');if(!host)return;host.innerHTML=resourceCategoryPicker(rows,{name:'resourceCategoryFilter',value:selected,emptyLabel:'全部分类',label:'筛选资料分类'});bindResourceCategoryPickers(host,rows,id=>{$('category').value=id;render()});return}
+
 const roots=rows.filter(c=>!c.parentId||!rows.some(parent=>parent.id===c.parentId)),selectedDirection=useDirections&&selected.startsWith('direction:')?(data.directions||[]).find(d=>d.id===selected.slice(10)):null,selectedRow=rows.find(c=>c.id===selected),label=selectedDirection?.title||selectedRow?.name||'全部分类';
 const host=$('category-picker');if(!host)return;host.innerHTML='<button type="button" class="cascade-trigger" aria-expanded="false">'+esc(label)+'<span>⌄</span></button><div class="cascade-menu" hidden><div class="cascade-column cascade-root-column"><button type="button" data-filter-all>全部分类</button>'+roots.map(root=>'<button type="button" data-filter-major="'+esc(root.id)+'">'+esc(root.name)+'</button>').join('')+'</div></div>';
 const trigger=host.querySelector('.cascade-trigger'),menu=host.querySelector('.cascade-menu');trigger.onclick=()=>{menu.hidden=!menu.hidden;trigger.setAttribute('aria-expanded',String(!menu.hidden))};
@@ -93,6 +96,7 @@ if(isResources)bindResourceRows();if(isPapers)bindPaperRows();
 document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x===b));$('query').value='';$('category').value='';$('year').value='';$('type').value='';$('read-status').value='';$('project-section').value='';$('project-author-order').value='';render()});
 $('query').oninput=render;['category','type','year','read-status','sort','project-section','project-author-order'].forEach(id=>$(id).oninput=render);
 fetch('./library.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('资料读取失败，请刷新重试');return r.json()}).then(x=>{data=normalizeGraph({...data,...x});data.categories||=[];data.resourceCategories||=[];data.resources||=[];populateFilters();$('stats').innerHTML=[['收藏文献',data.papers.length],['文献关联',data.relations.length],['研究成果',data.projects.length],['资料文件/链接',data.resources.length],['研究团队',data.teams.length]].map(([label,n])=>`<div><label>${label}</label><strong>${n}</strong></div>`).join('');$('status').textContent='';render()}).catch(e=>$('status').textContent=e.message);
+
 
 
 
