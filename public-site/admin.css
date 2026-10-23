@@ -1,2 +1,28 @@
 [hidden]{display:none!important}.admin{max-width:1050px;margin:30px auto!important;padding:24px!important;background:#fafbf8;min-height:90vh}.admin h1{margin:22px 0 12px}.admin>p{margin:16px 0;line-height:1.8}.admin nav{display:flex;gap:12px;margin:24px 0}.admin nav button{padding:12px;background:#eef2e9;border-radius:6px}.admin nav button.active{background:#4c6844;color:white}.admin input,.admin textarea,.admin select{border:1px solid #cbd6c2;border-radius:5px;padding:10px;background:white;width:100%;font:inherit}.admin #search{max-width:450px;margin-right:12px}.admin .actions{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}.admin .admin-row{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid #e0e6d8}.admin-row small{display:block;color:#718067;margin-top:8px}.admin-row button{margin:0 8px;white-space:nowrap}.admin dialog{max-width:650px;width:90%;max-height:85vh;overflow:auto;border:1px solid #cad7c0;border-radius:12px;padding:26px;margin:auto}.admin dialog::backdrop{background:#24371b66}.admin label{display:grid;gap:7px;margin:16px 0}.admin #message{background:#edf2e7;padding:12px;white-space:pre-wrap}.admin #dirty{margin:14px 0;color:#8f5a27}@media(max-width:700px){.admin{margin:0!important;padding:16px!important}.admin nav{flex-wrap:wrap}.admin-row{align-items:start!important;flex-direction:column}}
 .admin .category-row strong{font-weight:650}.admin .category-actions{display:flex;gap:8px;flex-wrap:wrap}.admin .category-actions button{margin:0}.admin .hint{color:#718067;font-size:13px}
+
+.admin .tree-category-group{background:#fff;border:1px solid #dce7f3;border-radius:10px;padding:18px}
+.admin .tree-category-group-head{display:flex;justify-content:space-between;align-items:center;gap:14px}
+.admin .tree-category-group-head>div{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.admin .tree-category-group-head strong{font-size:15px;color:#183b5d}
+.admin .tree-category-group-head small,.admin .tree-scope-count{font-size:11px;color:#71839a}
+.admin .tree-subcategories{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px;margin-top:15px}
+.admin .tree-subcategory{justify-content:space-between;text-align:left;padding:10px 12px;border:1px solid #dce7f3;background:#f8fbfd;color:#315573}
+.admin .tree-subcategory>span{display:grid;gap:4px}
+.admin .tree-subcategory small{font-size:10px;color:#71839a}
+.admin .tree-scope-toolbar{display:grid;gap:12px;margin:18px 0 10px}
+.admin .tree-scope-switch{display:flex;gap:7px;flex-wrap:wrap}
+.admin .tree-scope-switch button.selected{background:#1768ad;border-color:#1768ad;color:#fff}
+.admin .tree-back{justify-self:start;padding:6px 9px;background:transparent;border:0;color:#315573}
+.admin .admin-graph-editor .tree-scroll{max-height:72vh;overflow:auto;border:1px solid #dce7f3;border-radius:10px;background:#fff}
+.admin .admin-tree-paper{cursor:default}
+.admin .admin-tree-paper h3{color:#173c60}
+.admin .admin-node-toggle{margin-top:8px;padding:6px 10px;font-size:11px;background:#edf5fc;color:#1768ad;border-color:#d2e4f3}
+.admin .admin-node-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.admin .admin-node-actions button{padding:6px 9px;font-size:11px}
+.admin .admin-node-actions .danger{color:#a95248;border-color:#e7cfc9}
+.admin .admin-graph-restore{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin:16px 0}
+.admin .admin-graph-restore label{display:grid;gap:7px;margin:0;min-width:min(360px,100%)}
+.admin .admin-graph-restore button{background:#1768ad;color:#fff;border-color:#1768ad}
+.admin .tree-hint,.admin-graph-editor>.hint{margin:8px 0 14px;color:#71839a;line-height:1.7}
+@media(max-width:700px){.admin .tree-category-group-head{align-items:flex-start;flex-direction:column}.admin .tree-category-group-head>div{gap:6px}.admin .tree-category-group-head .primary{align-self:flex-start}.admin .tree-subcategories{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}.admin .admin-graph-restore{align-items:stretch;flex-direction:column}.admin .admin-graph-restore button{width:100%}}
