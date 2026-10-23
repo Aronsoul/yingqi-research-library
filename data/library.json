@@ -94,7 +94,7 @@
       "authors": "D. Goldberger et al.",
       "date": "2020",
       "summary": "提出三维单次曝光叠层成像（3DSSP），以单次采集数据解卷积出三维物体的多个平面，面向快速动态成像。",
-      "category": "a1858294-bd25-4b67-8ff9-abb8bfb2d0ec",
+      "category": "3d-ptychography-imaging",
       "tags": "3DSSP，单次曝光，动态成像",
       "type": "期刊论文",
       "details": "",
@@ -110,7 +110,7 @@
       "authors": "C. Chang et al.",
       "date": "2021",
       "summary": "通过高倾角照明与非傍轴迭代计算改进单次曝光三维叠层成像的图像质量。",
-      "category": "a1858294-bd25-4b67-8ff9-abb8bfb2d0ec",
+      "category": "3d-ptychography-imaging",
       "tags": "3DSSP，倾斜照明，非傍轴传播",
       "type": "期刊论文",
       "details": "",
@@ -1156,32 +1156,10 @@
       "parentId": null
     },
     {
-      "id": "bessel-beam-metasurfaces",
-      "name": "超表面",
-      "parentId": "bessel-beam-generation"
-    },
-    {
-      "id": "bessel-beam-optical-elements",
-      "name": "光学元件",
-      "parentId": "bessel-beam-generation"
-    },
-    {
       "name": "Tomography",
       "parentId": null,
       "teamIds": [],
       "id": "b6b1de93-9d44-4e76-a241-16a75dd63cad"
-    },
-    {
-      "name": "提高重建速度",
-      "parentId": "3d-ptychography-imaging",
-      "teamIds": [],
-      "id": "a1858294-bd25-4b67-8ff9-abb8bfb2d0ec"
-    },
-    {
-      "name": "提升轴向分辨率",
-      "parentId": "3d-ptychography-imaging",
-      "teamIds": [],
-      "id": "d58278cd-e276-4611-851d-ebc51a334685"
     }
   ],
   "treeNodes": [
