@@ -1251,5 +1251,16 @@
     }
   ],
   "teams": [],
-  "treeExcludedNodes": []
+  "treeExcludedNodes": [],
+  "directions": [
+    {
+      "id": "direction-axial-resolution",
+      "title": "提升轴向分辨率",
+      "paperIds": [
+        "ptychographic-microscope-2014",
+        "tilted-illumination-2021",
+        "virtual-depth-scan-2021"
+      ]
+    }
+  ]
 }
