@@ -1256,10 +1256,20 @@
     {
       "id": "direction-axial-resolution",
       "title": "提升轴向分辨率",
-      "paperIds": [
-        "ptychographic-microscope-2014",
-        "tilted-illumination-2021",
-        "virtual-depth-scan-2021"
+      "parentPaperId": "ptychographic-transmission-2012",
+      "papers": [
+        {
+          "id": "ptychographic-microscope-2014",
+          "label": "通过改进光源，提升轴向分辨率"
+        },
+        {
+          "id": "tilted-illumination-2021",
+          "label": "高倾角照明增强轴向能力，实现动态成像的同时提高轴向的分辨率能力。Ptychography需要足够多的迭代次数以降低重建误差。SSP的核心迭代次数由所记录的子衍射图数所决定。3DSSP探测遵循近轴近似且迭代计算中采用常见的菲涅尔衍射原理。这使得最外层传播角限制在相对于光轴几个度数范围内。器技仅能记录到少数不同的衍射图，因此重建结果质量差。同时目前缺乏解决分辨能力和可达空间分辨率的完全非近轴方法与样品透射对大入射角的不稳定响应"
+        },
+        {
+          "id": "virtual-depth-scan-2021",
+          "label": "通过算法提高轴向分辨率。 虚拟深度扫描扩展成像深度"
+        }
       ]
     }
   ]
