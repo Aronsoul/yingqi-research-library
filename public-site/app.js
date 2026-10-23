@@ -35,54 +35,24 @@ function visit(id){if(seen.has(id))return;seen.add(id);edges.filter(r=>r.from===
 rootsInScope.forEach(visit);for(const id of ids)if(!seen.has(id)){rootsInScope.push(id);visit(id)}
 function branch(id,path,edge){const p=papers.get(id),children=edges.filter(r=>r.from===id),cycle=path.has(id),next=new Set(path).add(id),u=paperURL(p);return `<li>${edge?`<div class="tree-edge-wrap"><span class="tree-edge-line tree-edge-line-before" aria-hidden="true"></span><div class="tree-edge">${esc(edge.label||'研究延伸')}</div><span class="tree-edge-line tree-edge-line-after" aria-hidden="true"></span></div>`:''}<article class="tree-paper"><span class="tree-year">${esc(p.date?.slice(0,4))}</span><h3>${esc(p.title)}</h3><p>${esc(p.summary||'暂无简介')}</p>${u?`<a href="${u}" target="_blank" rel="noreferrer">打开文献 ↗</a>`:''}</article>${!cycle&&children.length?`<ul>${children.map(r=>branch(r.to,next,r)).join('')}</ul>`:''}</li>`}
 const parent=selected?.parentId?categories.find(c=>c.id===selected.parentId):selected,children=parent?categories.filter(c=>c.parentId===parent.id):[];
-return `<div class="literature-tree"><div class="tree-toolbar"><div><strong>知识图谱</strong><span>滚轮缩放；Ctrl / ⌘ + 滚轮可在鼠标位置缩放</span></div><div class="tree-zoom" aria-label="知识图谱缩放控件"><button type="button" data-tree-zoom="out" aria-label="缩小知识图谱">−</button><output class="tree-zoom-level" aria-live="polite">100%</output><button type="button" data-tree-zoom="in" aria-label="放大知识图谱">+</button><button type="button" data-tree-zoom="reset">重置</button></div></div><div class="tree-scope-toolbar"><button type="button" class="tree-back" data-tree-back>返回分类总览</button><div class="tree-scope-switch"><button type="button" class="${selected?.id===parent?.id?'selected':''}" data-tree-scope="${esc(parent?.id||'')}">整个大类</button>${children.map(c=>`<button type="button" class="${selected?.id===c.id?'selected':''}" data-tree-scope="${esc(c.id)}">${esc(c.name)}</button>`).join('')}</div><span class="tree-scope-count">${esc(categoryPath(treeScope))} · ${scoped.length} 个节点 · ${edges.length} 条关联</span></div>${scoped.length?`<div class="tree-scroll"><div class="tree-stage"><ul class="tree-roots">${rootsInScope.map(id=>branch(id,new Set())).join('')}</ul></div></div><p class="tree-hint">默认显示所选范围内的全部文献；只显示两端文献都在此范围中的关联。</p>`: `<div class="empty"><h3>${allScoped.some(p=>memberIds.has(p.id)&&excluded.has(p.id))?'此范围内的节点均已隐藏':'此分类下暂无已加入图谱的文献'}</h3><p>${allScoped.some(p=>memberIds.has(p.id)&&excluded.has(p.id))?'可在资料管理的知识图谱编辑中恢复节点。':'请在资料管理的知识图谱中添加根节点或关联文献。'}</p></div>`}</div>`
+return `<div class="literature-tree"><div class="tree-toolbar"><div><strong>知识图谱</strong><span>滚轮缩放；按住鼠标拖动可移动</span></div><div class="tree-zoom" aria-label="知识图谱缩放控件"><button type="button" data-tree-zoom="out" aria-label="缩小知识图谱">−</button><output class="tree-zoom-level" aria-live="polite">100%</output><button type="button" data-tree-zoom="in" aria-label="放大知识图谱">+</button><button type="button" data-tree-zoom="reset">重置</button></div></div><div class="tree-scope-toolbar"><button type="button" class="tree-back" data-tree-back>返回分类总览</button><div class="tree-scope-switch"><button type="button" class="${selected?.id===parent?.id?'selected':''}" data-tree-scope="${esc(parent?.id||'')}">整个大类</button>${children.map(c=>`<button type="button" class="${selected?.id===c.id?'selected':''}" data-tree-scope="${esc(c.id)}">${esc(c.name)}</button>`).join('')}</div><span class="tree-scope-count">${esc(categoryPath(treeScope))} · ${scoped.length} 个节点 · ${edges.length} 条关联</span></div>${scoped.length?`<div class="tree-scroll"><div class="tree-stage"><ul class="tree-roots">${rootsInScope.map(id=>branch(id,new Set())).join('')}</ul></div></div><p class="tree-hint">默认显示所选范围内的全部文献；只显示两端文献都在此范围中的关联。</p>`: `<div class="empty"><h3>${allScoped.some(p=>memberIds.has(p.id)&&excluded.has(p.id))?'此范围内的节点均已隐藏':'此分类下暂无已加入图谱的文献'}</h3><p>${allScoped.some(p=>memberIds.has(p.id)&&excluded.has(p.id))?'可在资料管理的知识图谱编辑中恢复节点。':'请在资料管理的知识图谱中添加根节点或关联文献。'}</p></div>`}</div>`
 }
 function bindTreeZoom(){
-const scroll=$('content').querySelector('.tree-scroll');
-const stage=$('content').querySelector('.tree-stage');
-const canvas=$('content').querySelector('.tree-roots');
-const level=$('content').querySelector('.tree-zoom-level');
-const out=$('content').querySelector('[data-tree-zoom="out"]');
-const inn=$('content').querySelector('[data-tree-zoom="in"]');
+const scroll=$('content').querySelector('.tree-scroll'),stage=$('content').querySelector('.tree-stage'),canvas=$('content').querySelector('.tree-roots'),level=$('content').querySelector('.tree-zoom-level'),out=$('content').querySelector('[data-tree-zoom="out"]'),inn=$('content').querySelector('[data-tree-zoom="in"]');
 if(!scroll||!stage||!canvas)return;
 const minZoom=.1,maxZoom=3;
-const apply=()=>{
-stage.style.width=(canvas.offsetWidth*treeZoom)+'px';
-stage.style.height=(canvas.offsetHeight*treeZoom)+'px';
-canvas.style.transformOrigin='top left';
-canvas.style.transform='scale('+treeZoom+')';
-level.textContent=Math.round(treeZoom*100)+'%';
-out.disabled=treeZoom<=minZoom;
-inn.disabled=treeZoom>=maxZoom
-};
-const zoomAt=(next,x,y)=>{
-next=Math.max(minZoom,Math.min(maxZoom,next));
-const before=canvas.getBoundingClientRect();
-const pointX=(x-before.left)/treeZoom;
-const pointY=(y-before.top)/treeZoom;
-treeZoom=next;
-apply();
-const after=canvas.getBoundingClientRect();
-scroll.scrollLeft+=after.left+pointX*treeZoom-x;
-scroll.scrollTop+=after.top+pointY*treeZoom-y
-};
-const zoomFromButton=direction=>{
-const rect=scroll.getBoundingClientRect();
-const factor=direction==='in'?1.2:1/1.2;
-zoomAt(Math.round(treeZoom*factor*100)/100,rect.left+scroll.clientWidth/2,rect.top+scroll.clientHeight/2)
-};
-out.addEventListener('click',()=>zoomFromButton('out'));
-inn.addEventListener('click',()=>zoomFromButton('in'));
-$('content').querySelector('[data-tree-zoom="reset"]').addEventListener('click',()=>{
-const rect=scroll.getBoundingClientRect();
-zoomAt(1,rect.left+scroll.clientWidth/2,rect.top+scroll.clientHeight/2)
-});
-scroll.addEventListener('wheel',event=>{
-const overNode=event.target.closest('.tree-paper,.tree-edge');
-if(!event.ctrlKey&&!event.metaKey&&!overNode)return;
-event.preventDefault();
-zoomAt(treeZoom*Math.exp(-event.deltaY*.002),event.clientX,event.clientY)
-},{passive:false});
+const apply=()=>{stage.style.width=(canvas.offsetWidth*treeZoom)+'px';stage.style.height=(canvas.offsetHeight*treeZoom)+'px';canvas.style.transformOrigin='top left';canvas.style.transform='scale('+treeZoom+')';level.textContent=Math.round(treeZoom*100)+'%';out.disabled=treeZoom<=minZoom;inn.disabled=treeZoom>=maxZoom};
+const zoomAt=(next,x,y)=>{next=Math.max(minZoom,Math.min(maxZoom,next));const before=canvas.getBoundingClientRect(),pointX=(x-before.left)/treeZoom,pointY=(y-before.top)/treeZoom;treeZoom=next;apply();const after=canvas.getBoundingClientRect();scroll.scrollLeft+=after.left+pointX*treeZoom-x;scroll.scrollTop+=after.top+pointY*treeZoom-y};
+const zoomFromButton=direction=>{const rect=scroll.getBoundingClientRect(),factor=direction==='in'?1.2:1/1.2;zoomAt(Math.round(treeZoom*factor*100)/100,rect.left+scroll.clientWidth/2,rect.top+scroll.clientHeight/2)};
+out.addEventListener('click',()=>zoomFromButton('out'));inn.addEventListener('click',()=>zoomFromButton('in'));
+$('content').querySelector('[data-tree-zoom="reset"]').addEventListener('click',()=>{const rect=scroll.getBoundingClientRect();zoomAt(1,rect.left+scroll.clientWidth/2,rect.top+scroll.clientHeight/2)});
+scroll.addEventListener('wheel',event=>{event.preventDefault();zoomAt(treeZoom*Math.exp(-event.deltaY*.002),event.clientX,event.clientY)},{passive:false});
+let drag=null,suppressClick=false;
+scroll.addEventListener('pointerdown',event=>{if(event.button!==0||event.target.closest('a,button'))return;drag={id:event.pointerId,x:event.clientX,y:event.clientY,left:scroll.scrollLeft,top:scroll.scrollTop,moved:false};scroll.setPointerCapture(event.pointerId)});
+scroll.addEventListener('pointermove',event=>{if(!drag||drag.id!==event.pointerId)return;const dx=event.clientX-drag.x,dy=event.clientY-drag.y;if(!drag.moved&&(Math.abs(dx)>3||Math.abs(dy)>3)){drag.moved=true;scroll.classList.add('is-panning')}if(drag.moved){scroll.scrollLeft=drag.left-dx;scroll.scrollTop=drag.top-dy;suppressClick=true}});
+const finishDrag=event=>{if(!drag||drag.id!==event.pointerId)return;const moved=drag.moved;drag=null;scroll.classList.remove('is-panning');if(scroll.hasPointerCapture(event.pointerId))scroll.releasePointerCapture(event.pointerId);if(moved)setTimeout(()=>{suppressClick=false},0)};
+scroll.addEventListener('pointerup',finishDrag);scroll.addEventListener('pointercancel',finishDrag);
+scroll.addEventListener('click',event=>{if(!suppressClick)return;event.preventDefault();event.stopPropagation();suppressClick=false},true);
 apply()
 }
 function renderCategoryPicker(rows,selected,lookup){
