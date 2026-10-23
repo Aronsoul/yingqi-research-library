@@ -1179,32 +1179,194 @@
       "fileName": "图像处理基础知识.pdf",
       "size": 1078284,
       "mediaType": "application/pdf"
+    },
+    {
+      "title": "信息光学部分资料ppt",
+      "category": "83fd66e4-f423-4f5f-bb3c-2f6ead8154db",
+      "url": "",
+      "summary": "",
+      "details": "",
+      "teamIds": [],
+      "id": "388e5360-c1ae-4bb4-86fa-4f56df27c38f",
+      "images": [],
+      "kind": "file",
+      "path": "data/assets/02bc77d1-190d-4ca1-a5bd-c3985ceb2b39",
+      "contentSha": "d71583a171d9de4478be0de69560ab4348d2cf41",
+      "fileName": "信息光学资料.zip",
+      "size": 1888975,
+      "mediaType": "application/x-zip-compressed"
+    },
+    {
+      "title": "麦克斯韦方程推导",
+      "category": "83fd66e4-f423-4f5f-bb3c-2f6ead8154db",
+      "url": "",
+      "summary": "",
+      "details": "",
+      "teamIds": [],
+      "id": "0ad57445-1199-40bc-b40b-596dbc8dabf4",
+      "images": [],
+      "kind": "file",
+      "path": "data/assets/37a6c43f-5b34-4ed9-8c49-9a825da4f437",
+      "contentSha": "f2482e82f3adfdc44543981c6e470e48ba7688d3",
+      "fileName": "麦克斯韦方程.pdf",
+      "size": 8067130,
+      "mediaType": "application/pdf"
+    },
+    {
+      "title": "深大模板",
+      "category": "bd69c06a-333d-4af3-9e67-63735de496ce",
+      "url": "",
+      "summary": "",
+      "details": "",
+      "teamIds": [],
+      "id": "40cb8d5c-5fc3-4181-aebc-17a82e904bd2",
+      "images": [],
+      "kind": "file",
+      "path": "data/assets/1dcc3938-c2b8-4a93-a483-9c8d1f5806fa",
+      "contentSha": "3a627db8df14a4139bcc8981998a3bbc68d2aaff",
+      "fileName": "深大模板.pptx",
+      "size": 560771,
+      "mediaType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    {
+      "title": "PPT模板1",
+      "category": "bd69c06a-333d-4af3-9e67-63735de496ce",
+      "url": "",
+      "summary": "",
+      "details": "",
+      "teamIds": [],
+      "id": "6ec38f2e-cb7d-4eb6-a0b0-3fa103ab4021",
+      "images": [],
+      "kind": "file",
+      "path": "data/assets/38790930-de91-421d-8e78-d259426784c8",
+      "contentSha": "c0e7b6cc9b35665c1117fad90b90b43dd5735ca0",
+      "fileName": "红色.pptx",
+      "size": 6338422,
+      "mediaType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    {
+      "title": "PPt模板2",
+      "category": "bd69c06a-333d-4af3-9e67-63735de496ce",
+      "url": "",
+      "summary": "",
+      "details": "",
+      "teamIds": [],
+      "id": "9648e581-b560-4ef4-808b-4836691b4700",
+      "images": [],
+      "kind": "file",
+      "path": "data/assets/b2806bdb-2921-4641-be02-57887b7a9818",
+      "contentSha": "bc5747dcdb80850b14fd2e16e65d9a8c78894674",
+      "fileName": "ppt模板.pptx",
+      "size": 6264702,
+      "mediaType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    {
+      "title": "资料1",
+      "category": "3d76ee95-8495-4a1f-8ed2-4caeba52643e",
+      "url": "",
+      "summary": "",
+      "details": "",
+      "teamIds": [],
+      "id": "e0d6e8e5-36bc-4fc0-b450-f1c67b05cdc6",
+      "images": [],
+      "kind": "file",
+      "path": "data/assets/1c14759f-19d5-4a1e-a478-b0072cf950c6",
+      "contentSha": "a2d4efb02ddec18f76daa50ef0cfbe13a06639ce",
+      "fileName": "article_2arnibazkf.html",
+      "size": 73634,
+      "mediaType": "text/html"
+    },
+    {
+      "title": "资料2",
+      "category": "3d76ee95-8495-4a1f-8ed2-4caeba52643e",
+      "url": "",
+      "summary": "",
+      "details": "",
+      "teamIds": [],
+      "id": "601c945e-53a5-493f-9f62-b21907473553",
+      "images": [],
+      "kind": "file",
+      "path": "data/assets/0343c8b2-4aad-4fa7-a724-ae15b2214c11",
+      "contentSha": "3c8278025452afd93ab1461cf4a8574c69fd7adc",
+      "fileName": "article_79i2ixrkz0h.html",
+      "size": 21244,
+      "mediaType": "text/html"
+    },
+    {
+      "title": "资料3",
+      "category": "3d76ee95-8495-4a1f-8ed2-4caeba52643e",
+      "url": "",
+      "summary": "",
+      "details": "",
+      "teamIds": [],
+      "id": "8548cb29-4356-4a7f-ac67-6388d293c803",
+      "images": [],
+      "kind": "file",
+      "path": "data/assets/61e5ee74-233b-4420-b945-32dfc21fe2a2",
+      "contentSha": "7f8a0bf4b7fb55f578a598a3d9263f1a82010aae",
+      "fileName": "article_153555748.html",
+      "size": 57143,
+      "mediaType": "text/html"
+    },
+    {
+      "title": "资料4",
+      "category": "3d76ee95-8495-4a1f-8ed2-4caeba52643e",
+      "url": "",
+      "summary": "",
+      "details": "",
+      "teamIds": [],
+      "id": "fd9129ec-0271-4582-a1bb-17fc4ec676b7",
+      "images": [],
+      "kind": "file",
+      "path": "data/assets/a010984e-5a58-4cbb-8eed-8024ae60c4bb",
+      "contentSha": "3e2f6b9183fce40b4d18c926295cb09ac04b9365",
+      "fileName": "C++开发者必看：GENICAM标准编程实现高级功能实操手册 - CSDN文库.pdf",
+      "size": 1953017,
+      "mediaType": "application/pdf"
     }
   ],
   "resourceCategories": [
     {
-      "name": "光学器件",
+      "name": "光学模型(绘图)",
       "parentId": null,
       "teamIds": [],
       "id": "c19fd09e-8cd2-4d62-b7b1-ae9647acd383"
-    },
-    {
-      "name": "Book",
-      "parentId": null,
-      "teamIds": [],
-      "id": "e5ac0ba3-7163-4091-9c50-2993519357a0"
-    },
-    {
-      "name": "光学",
-      "parentId": "e5ac0ba3-7163-4091-9c50-2993519357a0",
-      "teamIds": [],
-      "id": "0d76d733-7780-47b4-babe-4aabdbd7993f"
     },
     {
       "name": "图像处理",
       "parentId": null,
       "teamIds": [],
       "id": "21a70b62-a529-4fb4-a3ed-c941133db71d"
+    },
+    {
+      "name": "光学资料",
+      "parentId": null,
+      "teamIds": [],
+      "id": "83fd66e4-f423-4f5f-bb3c-2f6ead8154db"
+    },
+    {
+      "name": "Book",
+      "parentId": "83fd66e4-f423-4f5f-bb3c-2f6ead8154db",
+      "teamIds": [],
+      "id": "eba8e8ab-e8e4-4d87-98f4-808f2fa4eb90"
+    },
+    {
+      "name": "PPT模板",
+      "parentId": null,
+      "teamIds": [],
+      "id": "bd69c06a-333d-4af3-9e67-63735de496ce"
+    },
+    {
+      "name": "工程开发",
+      "parentId": null,
+      "teamIds": [],
+      "id": "81dcc34d-fe1c-4e44-9c08-b790670b12b4"
+    },
+    {
+      "name": "通用相机控制程序开发",
+      "parentId": "81dcc34d-fe1c-4e44-9c08-b790670b12b4",
+      "teamIds": [],
+      "id": "3d76ee95-8495-4a1f-8ed2-4caeba52643e"
     }
   ],
   "teams": [],
